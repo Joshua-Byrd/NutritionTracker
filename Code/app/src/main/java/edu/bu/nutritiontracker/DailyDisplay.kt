@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import java.text.SimpleDateFormat
 import java.util.Date
 
 /**
@@ -11,9 +12,11 @@ import java.util.Date
  *  ---NEEDS TO ACCEPT A DATE TO DISPLAY (Date class?)---
  */
 @Composable
-fun DailyDisplay(date: Date, modifier: Modifier) {
+fun DailyDisplay(date: Date) {
     Column {
-        date.toString()
+
+        val formattedDate = SimpleDateFormat("MM/dd/yyyy").format(date)
+        Text(formattedDate)
     }
 }
 
@@ -21,17 +24,12 @@ fun DailyDisplay(date: Date, modifier: Modifier) {
  * Displays summary of calories and macronutrients
  */
 @Composable
-fun Summary(
-    calories: Int,
-    carbs: Int,
-    protein: Int,
-    fat: Int,
-    satFat: Int,
-    fiber: Int
-){}
+fun Summary(foodMap: Map<String, Int>){}
 
 /**
  * Displays list of foods eaten ---NEEDS TO ACCEPT A LIST OF FOOD OBJECTS---
  */
 @Composable
-fun FoodList(){}
+fun FoodList(foodList: List<Food>){
+
+}

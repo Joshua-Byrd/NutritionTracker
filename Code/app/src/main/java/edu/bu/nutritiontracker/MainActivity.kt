@@ -45,7 +45,8 @@ class MainActivity : ComponentActivity() {
     showSystemUi = true)
 @Composable
 fun DailyDisplayPreview() {
-    DailyDisplay()
+    val currentDate = Date()
+    DailyDisplay(currentDate)
 }
 
 /**
