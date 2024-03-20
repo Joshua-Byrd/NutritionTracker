@@ -1,2 +1,2 @@
 # METCS683Assignments
-Please briefly introduce yourself and this repository.
+My name is Joshua Byrd and this repo stores the code for my term project in CS683.

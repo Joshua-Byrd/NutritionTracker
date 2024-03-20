@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
 import edu.bu.nutritiontracker.Food
+import edu.bu.nutritiontracker.DailyDisplay
+import java.util.Date
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainDisplay("03/16/2024", Modifier)
+
                 }
             }
         }
@@ -32,42 +34,18 @@ class MainActivity : ComponentActivity() {
 }
 
 
-/**
- * Displays date, nutrition summary and list of foods eaten
- *  ---NEEDS TO ACCEPT A DATE TO DISPLAY (Date class?)---
- */
-@Composable
-fun MainDisplay(date: String, modifier: Modifier) {
-    Column {
-        Text(date)
-    }
-}
 
-/**
- * Displays summary of calories and macronutrients
- */
-@Composable
-fun Summary(
-    calories: Int,
-    carbs: Int,
-    protein: Int,
-    fat: Int,
-    satFat: Int,
-    fiber: Int
-    ){}
 
-/**
- * Displays list of foods eaten ---NEEDS TO ACCEPT A LIST OF FOOD OBJECTS---
- */
-@Composable
-fun FoodList(){}
+
+
+
 
 @Preview(
     showBackground = true,
     showSystemUi = true)
 @Composable
-fun MainDisplayPreview() {
-    MainDisplay(date = "03/16/2024", Modifier)
+fun DailyDisplayPreview() {
+    DailyDisplay()
 }
 
 /**
