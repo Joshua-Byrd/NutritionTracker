@@ -1,4 +1,4 @@
-package edu.bu.nutritiontracker
+package edu.bu.nutritiontracker.data
 
 class Food(
     val name: String,

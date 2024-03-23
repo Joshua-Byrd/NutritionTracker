@@ -1,6 +1,6 @@
-package edu.bu.nutritiontracker
+package edu.bu.nutritiontracker.util
 
-import edu.bu.nutritiontracker.Food
+import edu.bu.nutritiontracker.data.Food
 
 /**
  * Provides utility functions to other classes/Activities
@@ -11,7 +11,7 @@ import edu.bu.nutritiontracker.Food
  * Accepts a list of Food objects, sums each of their constituent data
  * points (calories, macros) and returns a map of the sums
  */
-fun sumFoodDate(foodList: List<Food>): Map<String, Int>{
+fun sumFoods(foodList: List<Food>): Map<String, Int>{
     val foodMap = mutableMapOf<String, Int>(
         "calories" to 0,
         "protein" to 0,

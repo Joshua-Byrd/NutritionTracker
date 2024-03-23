@@ -3,7 +3,7 @@ package edu.bu.nutritiontracker
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import edu.bu.nutritiontracker.data.Food
 import java.text.SimpleDateFormat
 import java.util.Date
 
