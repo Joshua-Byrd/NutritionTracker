@@ -2,11 +2,11 @@ package edu.bu.nutritiontracker.data
 
 class Food(
     val name: String,
-    val calories: Int,
-    val protein: Int,
-    val totalFat: Int,
-    val carbohydrates: Int,
-    val saturatedFat: Int,
-    val fiber: Int
+    val calories: Double,
+    val protein: Double,
+    val totalFat: Double,
+    val carbohydrates: Double,
+    val saturatedFat: Double,
+    val fiber: Double
 ) {
-}
+    }

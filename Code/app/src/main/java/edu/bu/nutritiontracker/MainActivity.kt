@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
+import edu.bu.nutritiontracker.util.getTestFoodMap
 import java.util.Date
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    val currentDate = Date()
+                    DailyDisplay(currentDate, getTestFoodMap())
                 }
             }
         }
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DailyDisplayPreview() {
     val currentDate = Date()
-    DailyDisplay(currentDate)
+    DailyDisplay(currentDate, getTestFoodMap())
 }
 
 /**
