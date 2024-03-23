@@ -13,13 +13,16 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.util.getTestFoodMap
 import edu.bu.nutritiontracker.util.sumFoods
@@ -33,20 +36,23 @@ import java.util.Date
 @Composable
 fun DailyDisplay(date: Date, foodMap: Map<Food, Int>) {
     Column (
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+
     ){
         //display date
         val formattedDate = SimpleDateFormat("MM/dd/yyyy").format(date)
-        Text(formattedDate)
+        Text(formattedDate, fontSize = 24.sp, fontWeight = FontWeight.Bold)
 
         Spacer(
             modifier = Modifier.height(10.dp)
         )
 
         //display summaries
-        Text("Summary")
+        Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
         val foodSummary = sumFoods(foodMap)
         foodSummary.forEach {
             entry ->
@@ -55,14 +61,15 @@ fun DailyDisplay(date: Date, foodMap: Map<Food, Int>) {
                 modifier = Modifier.fillMaxWidth()
             ){
                 Text(entry.key)
-                Text("${entry.value}")
+                val formattedValue = String.format("%.1f", entry.value)
+                Text(formattedValue)
             }
         }
         Spacer(
             modifier = Modifier.height(10.dp)
         )
 
-        Text("Foods")
+        Text("Food", fontSize = 18.sp, fontWeight = FontWeight.Bold)
         //display full list of foods eaten
         LazyColumn {
 
@@ -79,7 +86,8 @@ fun DailyDisplay(date: Date, foodMap: Map<Food, Int>) {
                                 .widthIn(min = 48.dp),
                             textAlign = TextAlign.Start
                         )
-                        Text("${entry.key.calories * entry.value}cals")
+                        val formattedCals = String.format("%.1f",(entry.key.calories * entry.value))
+                        Text("$formattedCals cals")
                     }
                 }
             }

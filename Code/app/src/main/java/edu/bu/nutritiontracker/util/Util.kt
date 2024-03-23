@@ -39,22 +39,22 @@ fun getTestFoodMap(): Map<Food, Int> {
 fun sumFoods(foodMap: Map<Food, Int>): Map<String, Double>{
 
     val result = mutableMapOf<String, Double>(
-        "calories" to 0.0,
-        "protein" to 0.0,
-        "totalFat" to 0.0,
-        "carbohydrates" to 0.0,
-        "saturatedFat" to 0.0,
-        "fiber" to 0.0
+        "Calories" to 0.0,
+        "Protein" to 0.0,
+        "Fat" to 0.0,
+        "Carbohydrates" to 0.0,
+        "Saturated Fat" to 0.0,
+        "Fiber" to 0.0
     )
 
     //Get the data point, multiply by number of servings, and add to total in result
     foodMap.forEach {entry ->
-        result["calories"] = result.getValue("calories") + (entry.key.calories * entry.value)
-        result["protein"] = result.getValue("protein") + (entry.key.protein * entry.value)
-        result["totalFat"] = result.getValue("totalFat") + (entry.key.totalFat * entry.value)
-        result["carbohydrates"] = result.getValue("carbohydrates") + (entry.key.carbohydrates * entry.value)
-        result["saturatedFat"] = result.getValue("saturatedFat") + (entry.key.saturatedFat * entry.value)
-        result["fiber"] = result.getValue("fiber") + (entry.key.fiber * entry.value)
+        result["Calories"] = result.getValue("Calories") + (entry.key.calories * entry.value)
+        result["Protein"] = result.getValue("Protein") + (entry.key.protein * entry.value)
+        result["Fat"] = result.getValue("Fat") + (entry.key.totalFat * entry.value)
+        result["Carbohydrates"] = result.getValue("Carbohydrates") + (entry.key.carbohydrates * entry.value)
+        result["Saturated Fat"] = result.getValue("Saturated Fat") + (entry.key.saturatedFat * entry.value)
+        result["Fiber"] = result.getValue("Fiber") + (entry.key.fiber * entry.value)
 
     }
 
