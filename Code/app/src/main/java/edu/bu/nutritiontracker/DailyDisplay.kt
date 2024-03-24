@@ -24,6 +24,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -38,83 +40,96 @@ import java.util.Date
 /**
  * Displays date, nutrition summary and list of foods eaten
  */
+
+
 @Composable
 fun DailyDisplay(date: Date, foodMap: Map<Food, Int>) {
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxSize()
             .padding(16.dp)
 
     ){
-        //display date
-        val formattedDate = SimpleDateFormat("MM/dd/yyyy").format(date)
-        Text(formattedDate, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+
+        DateDisplay(date)
 
         Spacer(
             modifier = Modifier.height(10.dp)
         )
 
-        //display summaries
-        Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        val foodSummary = sumFoods(foodMap)
-        foodSummary.forEach {
+        Summary(foodMap)
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+        FoodList(foodMap)
+
+
+        BottomMenu() {}
+    }
+
+
+}
+
+@Composable
+fun DateDisplay(date: Date) {
+    //display date
+    val formattedDate = SimpleDateFormat("MM/dd/yyyy").format(date)
+    Text(formattedDate, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+}
+
+@Composable
+fun Summary(foodMap: Map<Food, Int>) {
+    //display summaries
+    Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+    val foodSummary = sumFoods(foodMap)
+    foodSummary.forEach {
             entry ->
-            Row (
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ){
-                Text(entry.key)
-                val formattedValue = String.format("%.1f", entry.value)
-                Text(formattedValue)
-            }
+        Row (
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ){
+            Text(entry.key)
+            val formattedValue = String.format("%.1f", entry.value)
+            Text(formattedValue)
         }
-        Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-
-        Text("Food", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        //display full list of foods eaten
-        LazyColumn {
-
-            foodMap.forEach { entry ->
-                item {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(entry.key.name)
-                        Text("${entry.value} serving(s)",
-                            modifier = Modifier
-                                .widthIn(min = 48.dp),
-                            textAlign = TextAlign.Start
-                        )
-                        val formattedCals = String.format("%.1f",(entry.key.calories * entry.value))
-                        Text("$formattedCals cals")
-                    }
-                }
-            }
-        }
-
-        Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-        
-        BottomMenu(onBackButtonClick = { /*TODO*/ }) {
-            
-        }
-
-
     }
 }
 
-//display bottom menu (just "add food" food now
+
+@Composable
+fun FoodList(foodMap: Map<Food, Int>) {
+    Text("Food", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+    //display full list of foods eaten
+    LazyColumn (
+    ){
+        foodMap.forEach { entry ->
+            item {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(entry.key.name)
+                    Text("${entry.value} serving(s)",
+                        modifier = Modifier
+                            .widthIn(min = 48.dp),
+                        textAlign = TextAlign.Start
+                    )
+                    val formattedCals = String.format("%.1f",(entry.key.calories * entry.value))
+                    Text("$formattedCals cals")
+                }
+            }
+        }
+    }
+}
+
+//display bottom menu (just "add food" food and back butto for now)
 @Composable
 fun BottomMenu(
-    onBackButtonClick: () -> Unit,
-    onAddFoodButtonClick: () -> Unit,
+    onBackButtonClick: () -> Unit
 ) {
     Row (
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -131,7 +146,7 @@ fun BottomMenu(
             )
         }
 
-        Button(onClick = onAddFoodButtonClick) {
+        Button(onClick = {}) {
             Text("Add Food")
         }
     }
