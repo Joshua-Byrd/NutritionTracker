@@ -16,6 +16,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -31,7 +37,6 @@ import java.util.Date
 
 /**
  * Displays date, nutrition summary and list of foods eaten
- *  ---NEEDS TO ACCEPT A DATE TO DISPLAY (Date class?)---
  */
 @Composable
 fun DailyDisplay(date: Date, foodMap: Map<Food, Int>) {
@@ -93,9 +98,41 @@ fun DailyDisplay(date: Date, foodMap: Map<Food, Int>) {
             }
         }
 
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+        
+        BottomMenu(onBackButtonClick = { /*TODO*/ }) {
+            
+        }
 
-        //display bottom menu (just "add food" food now
 
     }
 }
 
+//display bottom menu (just "add food" food now
+@Composable
+fun BottomMenu(
+    onBackButtonClick: () -> Unit,
+    onAddFoodButtonClick: () -> Unit,
+) {
+    Row (
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ){
+
+        IconButton(onClick = onBackButtonClick) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Back"
+            )
+        }
+
+        Button(onClick = onAddFoodButtonClick) {
+            Text("Add Food")
+        }
+    }
+}

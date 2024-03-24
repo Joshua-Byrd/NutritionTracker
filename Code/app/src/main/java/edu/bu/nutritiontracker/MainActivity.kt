@@ -50,8 +50,6 @@ fun DailyDisplayPreview() {
 /**
  * TO DO FOR ITERATION 1
  *
- * 2. Write functions: MainDisplay, FoodList, Summary
- * 3. MainActivity.kt should be able to display info from any date
  * 4. Create Activity for Searching for foods
  *
  */
