@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
+import edu.bu.nutritiontracker.util.getTestFoodList
 import edu.bu.nutritiontracker.util.getTestFoodMap
 import java.util.Date
 
@@ -60,3 +61,13 @@ fun AddFoodPreview(){
         25.1, 0.0, 4.4)
     AddFood(apple)
 }
+
+//@Preview(
+//    showBackground = true,
+//    showSystemUi = true)
+//@Composable
+//fun FoodSearchResultPreview(){
+//    val foodList = getTestFoodList()
+//    FoodSearchResult(name = "Apple", foodList = foodList)
+//
+//}
