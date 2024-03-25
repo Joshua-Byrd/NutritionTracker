@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
 import edu.bu.nutritiontracker.util.getTestFoodMap
 import java.util.Date
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val currentDate = Date()
                     DailyDisplay(currentDate, getTestFoodMap())
+
                 }
             }
         }
@@ -32,24 +34,29 @@ class MainActivity : ComponentActivity() {
 }
 
 
+//@Preview(
+//    showBackground = true,
+//    showSystemUi = true)
+//@Composable
+//fun DailyDisplayPreview() {
+//    val currentDate = Date()
+//    DailyDisplay(currentDate, getTestFoodMap())
+//}
 
-
-
-
-
+//@Preview(
+//    showBackground = true,
+//    showSystemUi = true)
+//@Composable
+//fun FoodSearchPreview(){
+//    FoodSearch(getTestFoodMap())
+//}
 
 @Preview(
     showBackground = true,
     showSystemUi = true)
 @Composable
-fun DailyDisplayPreview() {
-    val currentDate = Date()
-    DailyDisplay(currentDate, getTestFoodMap())
+fun AddFoodPreview(){
+    val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
+        25.1, 0.0, 4.4)
+    AddFood(apple)
 }
-
-/**
- * TO DO FOR ITERATION 1
- *
- * 4. Create Activity for Searching for foods
- *
- */

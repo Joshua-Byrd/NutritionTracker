@@ -55,13 +55,19 @@ fun FoodSearch(recentFoodList: Map<Food, Int>) {
 
 @Composable
 fun FoodSearchBar() {
-    OutlinedTextField(
-        value = "",
-        onValueChange = {})
+    Column(
+        horizontalAlignment = Alignment.Start
+    ) {
 
-    Button(
-        onClick = { /*TODO*/ }) {
-        Text("Search")
+        OutlinedTextField(
+            value = "",
+            onValueChange = {})
+
+        Button(
+            onClick = { /*TODO*/ },
+        ) {
+            Text("Search")
+        }
     }
 }
 
