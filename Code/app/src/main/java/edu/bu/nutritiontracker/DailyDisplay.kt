@@ -36,6 +36,7 @@ import edu.bu.nutritiontracker.util.getTestFoodMap
 import edu.bu.nutritiontracker.util.sumFoods
 import java.text.SimpleDateFormat
 import java.util.Date
+import edu.bu.nutritiontracker.components.BottomMenu
 
 /**
  * Displays date, nutrition summary and list of foods eaten
@@ -126,28 +127,3 @@ fun FoodList(foodMap: Map<Food, Int>) {
     }
 }
 
-//display bottom menu (just "add food" food and back butto for now)
-@Composable
-fun BottomMenu(
-    onBackButtonClick: () -> Unit
-) {
-    Row (
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ){
-
-        IconButton(onClick = onBackButtonClick) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back"
-            )
-        }
-
-        Button(onClick = {}) {
-            Text("Add Food")
-        }
-    }
-}
