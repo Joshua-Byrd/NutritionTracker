@@ -37,6 +37,7 @@ import edu.bu.nutritiontracker.util.sumFoods
 import java.text.SimpleDateFormat
 import java.util.Date
 import edu.bu.nutritiontracker.components.BottomMenu
+import edu.bu.nutritiontracker.components.FoodList
 
 /**
  * Displays date, nutrition summary and list of foods eaten
@@ -64,7 +65,7 @@ fun DailyDisplay(date: Date, foodMap: Map<Food, Int>) {
         Spacer(
             modifier = Modifier.height(10.dp)
         )
-
+        Text("Foods Eaten", fontSize = 18.sp, fontWeight = FontWeight.Bold)
         FoodList(foodMap)
 
 
@@ -100,30 +101,5 @@ fun Summary(foodMap: Map<Food, Int>) {
 }
 
 
-@Composable
-fun FoodList(foodMap: Map<Food, Int>) {
-    Text("Food", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-    //display full list of foods eaten
-    LazyColumn (
-    ){
-        foodMap.forEach { entry ->
-            item {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(entry.key.name)
-                    Text("${entry.value} serving(s)",
-                        modifier = Modifier
-                            .widthIn(min = 48.dp),
-                        textAlign = TextAlign.Start
-                    )
-                    val formattedCals = String.format("%.1f",(entry.key.calories * entry.value))
-                    Text("$formattedCals cals")
-                }
-            }
-        }
-    }
-}
+
 
