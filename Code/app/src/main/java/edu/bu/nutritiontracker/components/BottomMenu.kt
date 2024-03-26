@@ -14,10 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 //display bottom menu (just "add food" food and back button for now)
 @Composable
 fun BottomMenu(
+    navController:NavController,
     onBackButtonClick: () -> Unit
 ) {
     Row (
@@ -35,8 +37,10 @@ fun BottomMenu(
             )
         }
 
-        Button(onClick = {}) {
-            Text("Add Food")
+        Button(onClick = {
+            navController.navigate("foodSearch")
+        }) {
+            Text("Search for Foods")
         }
     }
 }

@@ -9,6 +9,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
 import edu.bu.nutritiontracker.util.getTestFoodList
@@ -25,9 +28,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val currentDate = Date()
-                    DailyDisplay(currentDate, getTestFoodMap())
 
+                    App()
                 }
             }
         }
@@ -35,39 +37,29 @@ class MainActivity : ComponentActivity() {
 }
 
 
-//@Preview(
-//    showBackground = true,
-//    showSystemUi = true)
-//@Composable
-//fun DailyDisplayPreview() {
-//    val currentDate = Date()
-//    DailyDisplay(currentDate, getTestFoodMap())
-//}
 
-//@Preview(
-//    showBackground = true,
-//    showSystemUi = true)
-//@Composable
-//fun FoodSearchPreview(){
-//    FoodSearch(getTestFoodMap())
-//}
 
-@Preview(
-    showBackground = true,
-    showSystemUi = true)
+
 @Composable
-fun AddFoodPreview(){
-    val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
-        25.1, 0.0, 4.4)
-    AddFood(apple)
+fun App() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "dailyDisplay"){
+        composable("dailyDisplay"){
+            DailyDisplay(navController, Date(), getTestFoodMap())
+        }
+        composable("addFood"){
+            val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
+                25.1, 0.0, 4.4)
+            AddFood(navController, apple)
+        }
+        composable("foodSearch"){
+            FoodSearch(navController, getTestFoodMap() )
+        }
+        composable("foodSearchResult"){
+            FoodSearchResult(navController, "apple - 1 medium" , getTestFoodList() )
+        }
+        composable("bottomMenu"){}
+    }
 }
 
-//@Preview(
-//    showBackground = true,
-//    showSystemUi = true)
-//@Composable
-//fun FoodSearchResultPreview(){
-//    val foodList = getTestFoodList()
-//    FoodSearchResult(name = "Apple", foodList = foodList)
-//
-//}
+

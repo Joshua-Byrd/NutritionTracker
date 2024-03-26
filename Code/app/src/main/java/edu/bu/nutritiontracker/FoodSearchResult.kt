@@ -12,14 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.components.BottomMenu
+import edu.bu.nutritiontracker.util.getTestFoodList
 
 @Composable
-fun FoodSearchResult(name: String, foodList: List<Food>) {
+fun FoodSearchResult(navController: NavController,name: String, foodList: List<Food>) {
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -47,10 +50,20 @@ fun FoodSearchResult(name: String, foodList: List<Food>) {
             modifier = Modifier.height(10.dp)
         )
 
-        BottomMenu {
+        BottomMenu(navController) {
 
         }
     }
 
+
+}
+
+@Preview(
+    showBackground = true,
+    showSystemUi = true)
+@Composable
+fun FoodSearchResultPreview(){
+    val foodList = getTestFoodList()
+//    FoodSearchResult(name = "Apple", foodList = foodList)
 
 }

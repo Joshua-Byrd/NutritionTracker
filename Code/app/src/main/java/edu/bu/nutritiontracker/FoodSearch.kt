@@ -12,14 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
+import edu.bu.nutritiontracker.util.getTestFoodMap
 
 @Composable
-fun FoodSearch(recentFoodList: Map<Food, Int>) {
+fun FoodSearch(navController: NavController, recentFoodList: Map<Food, Int>) {
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -46,7 +49,7 @@ fun FoodSearch(recentFoodList: Map<Food, Int>) {
             modifier = Modifier.height(10.dp)
         )
 
-        BottomMenu {
+        BottomMenu(navController) {
 
         }
 
@@ -71,3 +74,10 @@ fun FoodSearchBar() {
     }
 }
 
+@Preview(
+    showBackground = true,
+    showSystemUi = true)
+@Composable
+fun FoodSearchPreview(){
+//    FoodSearch(getTestFoodMap())
+}

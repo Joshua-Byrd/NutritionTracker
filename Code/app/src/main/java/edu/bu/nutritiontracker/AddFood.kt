@@ -16,13 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.Food
 
 @Composable
-fun AddFood(food: Food) {
+fun AddFood(navController: NavController,food: Food) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -48,7 +50,7 @@ fun AddFood(food: Food) {
             modifier = Modifier.height(10.dp)
         )
 
-        BottomMenu {
+        BottomMenu (navController){
 
         }
 
@@ -133,4 +135,14 @@ fun AddFoodConfirm(){
         }
 
     }
+}
+
+@Preview(
+    showBackground = true,
+    showSystemUi = true)
+@Composable
+fun AddFoodPreview(){
+    val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
+        25.1, 0.0, 4.4)
+//    AddFood(navController, apple)
 }
