@@ -37,19 +37,18 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
-
-
 @Composable
 fun App() {
+    val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
+        25.1, 0.0, 4.4)
+
+    //Navigation
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "dailyDisplay"){
         composable("dailyDisplay"){
             DailyDisplay(navController, Date(), getTestFoodMap())
         }
         composable("addFood"){
-            val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
-                25.1, 0.0, 4.4)
             AddFood(navController, apple)
         }
         composable("foodSearch"){

@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.Food
 
@@ -144,5 +145,6 @@ fun AddFoodConfirm(){
 fun AddFoodPreview(){
     val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
         25.1, 0.0, 4.4)
-//    AddFood(navController, apple)
+    val navController = rememberNavController()
+    AddFood(navController, apple)
 }
