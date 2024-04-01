@@ -24,7 +24,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -33,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.util.getTestFoodMap
 import edu.bu.nutritiontracker.util.sumFoods
@@ -47,12 +50,15 @@ import edu.bu.nutritiontracker.components.FoodList
 
 
 @Composable
-fun DailyDisplay(navController: NavController,date: Date, foodMap: Map<Food, Int>) {
+fun DailyDisplay(navController: NavController, date: Date, foodMap: Map<Food, Int>) {
+
+
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(16.dp)
+            .fillMaxSize()
 
     ){
 
@@ -108,7 +114,8 @@ fun Summary(foodMap: Map<Food, Int>) {
 @Composable
 fun DailyDisplayPreview() {
     val currentDate = Date()
-//    DailyDisplay(navController = navController, currentDate, getTestFoodMap())
+    val navController = rememberNavController()
+    DailyDisplay(navController = navController, currentDate, getTestFoodMap())
 }
 
 
