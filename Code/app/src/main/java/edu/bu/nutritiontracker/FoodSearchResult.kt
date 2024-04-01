@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -20,10 +21,19 @@ import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.components.BottomMenu
+import edu.bu.nutritiontracker.data.FoodViewModel
+import edu.bu.nutritiontracker.data.FoodsMapViewModel
 import edu.bu.nutritiontracker.util.getTestFoodList
 
 @Composable
-fun FoodSearchResult(navController: NavController,name: String, foodList: List<Food>) {
+fun FoodSearchResult(
+    navController: NavController,
+    name: String,
+    viewModel: FoodsMapViewModel = FoodsMapViewModel()
+) {
+
+    val foodList = viewModel.foodList.collectAsState()
+
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -36,7 +46,7 @@ fun FoodSearchResult(navController: NavController,name: String, foodList: List<F
             modifier = Modifier.height(10.dp)
         )
 
-        foodList.forEach{
+        foodList.value.forEach{
                 food ->
             Row (
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -63,9 +73,9 @@ fun FoodSearchResult(navController: NavController,name: String, foodList: List<F
     showBackground = true,
     showSystemUi = true)
 @Composable
-fun FoodSearchResultPreview(){
-    val foodList = getTestFoodList()
+fun FoodSearchResultPreview(viewModel: FoodsMapViewModel = FoodsMapViewModel()){
+    val foodList = viewModel.foodList.collectAsState()
     val navController = rememberNavController()
-    FoodSearchResult(navController, name = "Apple", foodList = foodList)
+    FoodSearchResult(navController, name = "Apple")
 
 }

@@ -16,15 +16,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
-import edu.bu.nutritiontracker.data.FoodsViewModel
-import edu.bu.nutritiontracker.util.getTestFoodMap
+import edu.bu.nutritiontracker.data.FoodsMapViewModel
 
 
 @Composable
-fun FoodSearch(navController: NavController, viewModel: FoodsViewModel = FoodsViewModel()) {
+fun FoodSearch(navController: NavController, viewModel: FoodsMapViewModel = FoodsMapViewModel()) {
 
     val recentFoodList = viewModel.foodMap
 

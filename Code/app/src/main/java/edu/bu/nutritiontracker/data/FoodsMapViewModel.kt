@@ -1,25 +1,30 @@
 package edu.bu.nutritiontracker.data
 
 import androidx.lifecycle.ViewModel
+import edu.bu.nutritiontracker.util.getTestFoodList
 import edu.bu.nutritiontracker.util.getTestFoodMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class FoodsViewModel: ViewModel() {
-    //Just for testing purposes. This will eventually come from the database
+class FoodsMapViewModel: ViewModel() {
+
+    //Just for testing purposes. These will eventually come from the database
+    //this is a map of food items to their respective number of servings for display
     private val _foodMap = MutableStateFlow<Map<Food, Int>>(emptyMap())
+    private val _foodList = MutableStateFlow<List<Food>>(emptyList())
 
     val foodMap = _foodMap.asStateFlow()
+    val foodList = _foodList.asStateFlow()
 
     init {
         _foodMap.value = getTestFoodMap()
+        _foodList.value = getTestFoodList()
     }
 
     /**
      * Returns a map where the keys are the nutrition data points in _foodMap,
      * and the values are the sum of all food items
      */
-
     fun getSumOfFoodMap(): Map<String, Double>{
 
         val result = mutableMapOf<String, Double>(

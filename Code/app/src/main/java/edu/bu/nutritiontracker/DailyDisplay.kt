@@ -1,52 +1,29 @@
 package edu.bu.nutritiontracker
 
 import androidx.compose.ui.Alignment
-import android.content.ClipData.Item
-import android.graphics.Paint
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Arrangement.SpaceBetween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Recomposer
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import edu.bu.nutritiontracker.data.Food
-import edu.bu.nutritiontracker.util.getTestFoodMap
 import java.text.SimpleDateFormat
 import java.util.Date
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
-import edu.bu.nutritiontracker.data.FoodsViewModel
+import edu.bu.nutritiontracker.data.FoodsMapViewModel
 
 /**
  * Displays date, nutrition summary and list of foods eaten
@@ -55,7 +32,7 @@ import edu.bu.nutritiontracker.data.FoodsViewModel
 fun DailyDisplay(
     navController: NavController,
     date: Date,
-    viewModel: FoodsViewModel = FoodsViewModel()) {
+    viewModel: FoodsMapViewModel = FoodsMapViewModel()) {
 
     val foodMap = viewModel.foodMap.collectAsState()
 
@@ -97,7 +74,7 @@ fun DateDisplay(date: Date) {
 }
 
 @Composable
-fun Summary(viewModel: FoodsViewModel = FoodsViewModel()) {
+fun Summary(viewModel: FoodsMapViewModel = FoodsMapViewModel()) {
     //display summaries
     Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
     val foodSummary = viewModel.getSumOfFoodMap()

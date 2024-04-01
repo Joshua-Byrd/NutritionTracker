@@ -42,10 +42,6 @@ fun getTestFoodMap(): Map<Food, Int> {
         whiteRice to 3)
 }
 
-/**
- * Accepts a map where the keys are Food items and the values are the number of servings,
- * sums each of their constituent data points (calories, macros) and returns a map of the sums
- * for display purposes.
- */
+
 
 
