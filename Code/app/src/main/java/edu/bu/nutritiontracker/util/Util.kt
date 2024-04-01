@@ -1,4 +1,5 @@
 package edu.bu.nutritiontracker.util
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import edu.bu.nutritiontracker.data.Food
 
 /**
@@ -46,28 +47,5 @@ fun getTestFoodMap(): Map<Food, Int> {
  * sums each of their constituent data points (calories, macros) and returns a map of the sums
  * for display purposes.
  */
-fun sumFoods(foodMap: Map<Food, Int>): Map<String, Double>{
 
-    val result = mutableMapOf<String, Double>(
-        "Calories" to 0.0,
-        "Protein" to 0.0,
-        "Fat" to 0.0,
-        "Carbohydrates" to 0.0,
-        "Saturated Fat" to 0.0,
-        "Fiber" to 0.0
-    )
-
-    //Get the data point, multiply by number of servings, and add to total in result
-    foodMap.forEach {entry ->
-        result["Calories"] = result.getValue("Calories") + (entry.key.calories * entry.value)
-        result["Protein"] = result.getValue("Protein") + (entry.key.protein * entry.value)
-        result["Fat"] = result.getValue("Fat") + (entry.key.totalFat * entry.value)
-        result["Carbohydrates"] = result.getValue("Carbohydrates") + (entry.key.carbohydrates * entry.value)
-        result["Saturated Fat"] = result.getValue("Saturated Fat") + (entry.key.saturatedFat * entry.value)
-        result["Fiber"] = result.getValue("Fiber") + (entry.key.fiber * entry.value)
-
-    }
-
-    return result
-}
 

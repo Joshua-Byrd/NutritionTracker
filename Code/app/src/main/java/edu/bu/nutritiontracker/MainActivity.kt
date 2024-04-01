@@ -54,7 +54,7 @@ fun App() {
             AddFood(navController, apple)
         }
         composable("foodSearch"){
-            FoodSearch(navController, getTestFoodMap() )
+            FoodSearch(navController)
         }
         composable("foodSearchResult"){
             FoodSearchResult(navController, "apple - 1 medium" , getTestFoodList() )

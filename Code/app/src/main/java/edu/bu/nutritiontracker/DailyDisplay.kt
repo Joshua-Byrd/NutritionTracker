@@ -24,6 +24,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Recomposer
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -39,7 +42,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.util.getTestFoodMap
-import edu.bu.nutritiontracker.util.sumFoods
 import java.text.SimpleDateFormat
 import java.util.Date
 import edu.bu.nutritiontracker.components.BottomMenu
@@ -49,15 +51,13 @@ import edu.bu.nutritiontracker.data.FoodsViewModel
 /**
  * Displays date, nutrition summary and list of foods eaten
  */
-
-
 @Composable
 fun DailyDisplay(
     navController: NavController,
     date: Date,
     viewModel: FoodsViewModel = FoodsViewModel()) {
 
-    val foodMap = viewModel.foodMap
+    val foodMap = viewModel.foodMap.collectAsState()
 
     Column (
         verticalArrangement = Arrangement.Top,
@@ -74,13 +74,13 @@ fun DailyDisplay(
             modifier = Modifier.height(10.dp)
         )
 
-        Summary(foodMap)
+        Summary()
 
         Spacer(
             modifier = Modifier.height(10.dp)
         )
         Text("Foods Eaten", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        FoodList(foodMap)
+        FoodList()
 
 
         BottomMenu(navController){}
@@ -97,10 +97,10 @@ fun DateDisplay(date: Date) {
 }
 
 @Composable
-fun Summary(foodMap: Map<Food, Int>) {
+fun Summary(viewModel: FoodsViewModel = FoodsViewModel()) {
     //display summaries
     Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-    val foodSummary = sumFoods(foodMap)
+    val foodSummary = viewModel.getSumOfFoodMap()
     foodSummary.forEach {
             entry ->
         Row (

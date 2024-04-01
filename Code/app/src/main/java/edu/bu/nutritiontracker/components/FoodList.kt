@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -14,14 +16,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.bu.nutritiontracker.data.Food
+import edu.bu.nutritiontracker.data.FoodsViewModel
 
 @Composable
-fun FoodList(foodMap: Map<Food, Int>) {
+fun FoodList(viewModel: FoodsViewModel = FoodsViewModel()) {
+
+    val foodMap = viewModel.foodMap.collectAsState()
 
     //display full list of foods eaten
     LazyColumn (
     ){
-        foodMap.forEach { entry ->
+        foodMap.value.forEach { entry ->
             item {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,

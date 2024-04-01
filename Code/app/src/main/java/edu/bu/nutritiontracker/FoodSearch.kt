@@ -19,10 +19,15 @@ import androidx.navigation.NavController
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
+import edu.bu.nutritiontracker.data.FoodsViewModel
 import edu.bu.nutritiontracker.util.getTestFoodMap
 
+
 @Composable
-fun FoodSearch(navController: NavController, recentFoodList: Map<Food, Int>) {
+fun FoodSearch(navController: NavController, viewModel: FoodsViewModel = FoodsViewModel()) {
+
+    val recentFoodList = viewModel.foodMap
+
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,6 +48,8 @@ fun FoodSearch(navController: NavController, recentFoodList: Map<Food, Int>) {
         )
 
         Text("Recent Foods", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+
+        //Will retrieve the 20ish most recent food items
         FoodList(foodMap = recentFoodList)
 
         Spacer(
