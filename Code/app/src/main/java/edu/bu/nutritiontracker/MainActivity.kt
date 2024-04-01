@@ -9,10 +9,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.data.Food
+import edu.bu.nutritiontracker.data.FoodsViewModel
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
 import edu.bu.nutritiontracker.util.getTestFoodList
 import edu.bu.nutritiontracker.util.getTestFoodMap
@@ -46,7 +48,7 @@ fun App() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "dailyDisplay"){
         composable("dailyDisplay"){
-            DailyDisplay(navController, Date(), getTestFoodMap())
+            DailyDisplay(navController, Date())
         }
         composable("addFood"){
             AddFood(navController, apple)

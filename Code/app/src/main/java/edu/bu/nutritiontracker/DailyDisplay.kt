@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.data.Food
@@ -43,6 +44,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
+import edu.bu.nutritiontracker.data.FoodsViewModel
 
 /**
  * Displays date, nutrition summary and list of foods eaten
@@ -50,8 +52,12 @@ import edu.bu.nutritiontracker.components.FoodList
 
 
 @Composable
-fun DailyDisplay(navController: NavController, date: Date, foodMap: Map<Food, Int>) {
+fun DailyDisplay(
+    navController: NavController,
+    date: Date,
+    viewModel: FoodsViewModel = FoodsViewModel()) {
 
+    val foodMap = viewModel.foodMap
 
     Column (
         verticalArrangement = Arrangement.Top,
@@ -115,7 +121,7 @@ fun Summary(foodMap: Map<Food, Int>) {
 fun DailyDisplayPreview() {
     val currentDate = Date()
     val navController = rememberNavController()
-    DailyDisplay(navController = navController, currentDate, getTestFoodMap())
+    DailyDisplay(navController = navController, currentDate)
 }
 
 
