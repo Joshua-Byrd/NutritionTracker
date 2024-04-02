@@ -77,7 +77,7 @@ fun DateDisplay(date: Date) {
 fun Summary(viewModel: FoodViewModel = FoodViewModel()) {
     //display summaries
     Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-    val foodSummary = viewModel.getSumOfFoodMap()
+    val foodSummary = viewModel.getFoodListSummary()
     foodSummary.forEach {
             entry ->
         Row (

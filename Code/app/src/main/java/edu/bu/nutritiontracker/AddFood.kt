@@ -71,7 +71,7 @@ fun FoodPropertiesDisplay(food: Food?){
         modifier = Modifier.fillMaxWidth()
     ) {
         if(food != null) {
-            Text(food.name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text("${food.name}, ${food.serving}", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()

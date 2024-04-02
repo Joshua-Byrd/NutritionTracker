@@ -6,13 +6,16 @@ import edu.bu.nutritiontracker.util.getTestFoodMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class FoodViewModel: ViewModel() {
+class FoodViewModel(
+    private val foodDao: FoodDao,
+    private val dailyFoodsDao: DailyFoodsDao
+): ViewModel() {
 
     /*
-    Just for testing purposes. These will eventually come from the database
+    Just for testing purposes. These will eventually come from a Model
     Map contains Food(keys) and number of servings(values), list is just a list of
     foods matching some criteria, and food is a singular food item retrieved from a
-    query. For not it makes sense to keep them together, but will separate into
+    query. For now it makes sense to keep them together, but will separate into
     individual VMs if necessary.
      */
     private val _foodMap = MutableStateFlow<Map<Food, Int>>(emptyMap())
@@ -28,7 +31,7 @@ class FoodViewModel: ViewModel() {
         //all of these are just for testing
         _foodMap.value = getTestFoodMap()
         _foodList.value = getTestFoodList()
-        _food.value = Food(1,"apple - 1 medium", 95.6, 0.5, 0.3,
+        _food.value = Food(1,"apple", "1 - medium", 95.6, 0.5, 0.3,
             25.1, 0.0, 4.4)
     }
 
@@ -36,7 +39,7 @@ class FoodViewModel: ViewModel() {
      * Returns a map where the keys are the nutrition data points in _foodMap,
      * and the values are the sum of all food items
      */
-    fun getSumOfFoodMap(): Map<String, Double>{
+    fun getFoodListSummary(): Map<String, Double>{
 
         val result = mutableMapOf<String, Double>(
             "Calories" to 0.0,
