@@ -17,7 +17,7 @@ import edu.bu.nutritiontracker.data.FoodViewModel
 @Composable
 fun FoodList(viewModel: FoodViewModel = FoodViewModel()) {
 
-    val foodMap = viewModel.foodMap.collectAsState()
+    val foodMap = viewModel.dailyFoodsMap.collectAsState()
 
     //display full list of foods eaten
     LazyColumn (

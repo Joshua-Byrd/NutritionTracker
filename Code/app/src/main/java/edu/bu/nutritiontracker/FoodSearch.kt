@@ -24,7 +24,7 @@ import edu.bu.nutritiontracker.data.FoodViewModel
 @Composable
 fun FoodSearch(navController: NavController, viewModel: FoodViewModel = FoodViewModel()) {
 
-    val recentFoodList = viewModel.foodMap
+    val recentFoodList = viewModel.dailyFoodsMap
 
     Column (
         verticalArrangement = Arrangement.Top,

@@ -28,7 +28,7 @@ fun FoodSearchResult(
     viewModel: FoodViewModel = FoodViewModel()
 ) {
 
-    val foodList = viewModel.foodList.collectAsState()
+    val foodList = viewModel.foodSearchResultList.collectAsState()
 
     Column (
         verticalArrangement = Arrangement.Top,
@@ -70,7 +70,7 @@ fun FoodSearchResult(
     showSystemUi = true)
 @Composable
 fun FoodSearchResultPreview(viewModel: FoodViewModel = FoodViewModel()){
-    val foodList = viewModel.foodList.collectAsState()
+    val foodList = viewModel.foodSearchResultList.collectAsState()
     val navController = rememberNavController()
     FoodSearchResult(navController, name = "Apple")
 

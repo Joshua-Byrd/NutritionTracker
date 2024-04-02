@@ -34,7 +34,7 @@ fun DailyDisplay(
     date: Date,
     viewModel: FoodViewModel = FoodViewModel()) {
 
-    val foodMap = viewModel.foodMap.collectAsState()
+    val foodMap = viewModel.dailyFoodsMap.collectAsState()
 
     Column (
         verticalArrangement = Arrangement.Top,
