@@ -19,17 +19,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.components.BottomMenu
-import edu.bu.nutritiontracker.data.Food
-import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.FoodViewModel
-import edu.bu.nutritiontracker.data.FoodsMapViewModel
-import edu.bu.nutritiontracker.util.getTestFoodList
 
 @Composable
 fun FoodSearchResult(
     navController: NavController,
     name: String,
-    viewModel: FoodsMapViewModel = FoodsMapViewModel()
+    viewModel: FoodViewModel = FoodViewModel()
 ) {
 
     val foodList = viewModel.foodList.collectAsState()
@@ -73,7 +69,7 @@ fun FoodSearchResult(
     showBackground = true,
     showSystemUi = true)
 @Composable
-fun FoodSearchResultPreview(viewModel: FoodsMapViewModel = FoodsMapViewModel()){
+fun FoodSearchResultPreview(viewModel: FoodViewModel = FoodViewModel()){
     val foodList = viewModel.foodList.collectAsState()
     val navController = rememberNavController()
     FoodSearchResult(navController, name = "Apple")

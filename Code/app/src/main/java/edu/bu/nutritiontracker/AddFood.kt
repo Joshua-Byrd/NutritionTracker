@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -23,9 +24,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.Food
+import edu.bu.nutritiontracker.data.FoodViewModel
 
 @Composable
-fun AddFood(navController: NavController,food: Food) {
+fun AddFood(navController: NavController, viewModel: FoodViewModel = FoodViewModel()) {
+
+    val food = viewModel.food.collectAsState()
+
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -39,7 +44,7 @@ fun AddFood(navController: NavController,food: Food) {
             modifier = Modifier.height(10.dp)
         )
 
-        FoodPropertiesDisplay(food)
+        FoodPropertiesDisplay(food.value)
 
         Spacer(
             modifier = Modifier.height(10.dp)
@@ -60,53 +65,61 @@ fun AddFood(navController: NavController,food: Food) {
 }
 
 @Composable
-fun FoodPropertiesDisplay(food: Food){
+fun FoodPropertiesDisplay(food: Food?){
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(food.name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth())
-        {
-            Text("Calories")
-            Text(food.calories.toString())
-        }
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth())
-        {
-            Text("Protein")
-            Text(food.protein.toString())
-        }
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth())
-        {
-            Text("Fat")
-            Text(food.totalFat.toString())
-        }
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth())
-        {
-            Text("Carbohydrates")
-            Text(food.carbohydrates.toString())
-        }
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth())
-        {
-            Text("Saturated Fat")
-            Text(food.saturatedFat.toString())
-        }
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth())
-        {
-            Text("Fiber")
-            Text(food.fiber.toString())
+        if(food != null) {
+            Text(food.name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text("Calories")
+                Text(food.calories.toString())
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text("Protein")
+                Text(food.protein.toString())
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text("Fat")
+                Text(food.totalFat.toString())
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text("Carbohydrates")
+                Text(food.carbohydrates.toString())
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text("Saturated Fat")
+                Text(food.saturatedFat.toString())
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text("Fiber")
+                Text(food.fiber.toString())
+            }
         }
     }
 }
@@ -143,8 +156,6 @@ fun AddFoodConfirm(){
     showSystemUi = true)
 @Composable
 fun AddFoodPreview(){
-    val apple = Food("apple - 1 medium", 95.6, 0.5, 0.3,
-        25.1, 0.0, 4.4)
     val navController = rememberNavController()
-    AddFood(navController, apple)
+    AddFood(navController)
 }

@@ -18,11 +18,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
-import edu.bu.nutritiontracker.data.FoodsMapViewModel
+import edu.bu.nutritiontracker.data.FoodViewModel
 
 
 @Composable
-fun FoodSearch(navController: NavController, viewModel: FoodsMapViewModel = FoodsMapViewModel()) {
+fun FoodSearch(navController: NavController, viewModel: FoodViewModel = FoodViewModel()) {
 
     val recentFoodList = viewModel.foodMap
 
@@ -48,7 +48,7 @@ fun FoodSearch(navController: NavController, viewModel: FoodsMapViewModel = Food
         Text("Recent Foods", fontSize = 18.sp, fontWeight = FontWeight.Bold)
 
         //Will retrieve the 20ish most recent food items
-        FoodList(foodMap = recentFoodList)
+        FoodList()
 
         Spacer(
             modifier = Modifier.height(10.dp)

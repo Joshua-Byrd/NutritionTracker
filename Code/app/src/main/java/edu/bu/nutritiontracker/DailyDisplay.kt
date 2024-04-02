@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
-import edu.bu.nutritiontracker.data.FoodsMapViewModel
+import edu.bu.nutritiontracker.data.FoodViewModel
 
 /**
  * Displays date, nutrition summary and list of foods eaten
@@ -32,7 +32,7 @@ import edu.bu.nutritiontracker.data.FoodsMapViewModel
 fun DailyDisplay(
     navController: NavController,
     date: Date,
-    viewModel: FoodsMapViewModel = FoodsMapViewModel()) {
+    viewModel: FoodViewModel = FoodViewModel()) {
 
     val foodMap = viewModel.foodMap.collectAsState()
 
@@ -74,7 +74,7 @@ fun DateDisplay(date: Date) {
 }
 
 @Composable
-fun Summary(viewModel: FoodsMapViewModel = FoodsMapViewModel()) {
+fun Summary(viewModel: FoodViewModel = FoodViewModel()) {
     //display summaries
     Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
     val foodSummary = viewModel.getSumOfFoodMap()
