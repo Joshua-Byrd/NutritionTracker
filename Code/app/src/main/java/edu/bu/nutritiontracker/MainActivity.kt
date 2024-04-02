@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    App()
+                    NutritionTrackerApp()
                 }
             }
         }
@@ -35,26 +35,6 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Composable
-fun App() {
 
-    //Navigation
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "dailyDisplay"){
-        composable("dailyDisplay"){
-            DailyDisplay(navController, Date())
-        }
-        composable("addFood"){
-            AddFood(navController)
-        }
-        composable("foodSearch"){
-            FoodSearch(navController)
-        }
-        composable("foodSearchResult"){
-            FoodSearchResult(navController, "apple - 1 medium")
-        }
-        composable("bottomMenu"){}
-    }
-}
 
 
