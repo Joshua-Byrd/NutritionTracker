@@ -6,12 +6,10 @@ import edu.bu.nutritiontracker.util.getTestFoodMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class FoodViewModel(
-    private val foodDao: FoodDao,
-    private val dailyFoodsDao: DailyFoodsDao
-): ViewModel() {
+class FoodViewModel(): ViewModel() {
 
-    private val _dailyFoodsWithFood = MutableStateFlow<List<DailyFoodEntryWithFood>>((emptyList()))
+    private val _dailyFoodsWithFood = MutableStateFlow<List<DailyFoodEntryWithFood>>(emptyList())
+    private val _recentFoodsList = MutableStateFlow<List<DailyFoodEntryWithFood>>(emptyList())
     private val _foodSearchResultList = MutableStateFlow<List<Food>>(emptyList())
     private val _food = MutableStateFlow<Food?>(null)
 
@@ -44,13 +42,18 @@ class FoodViewModel(
 
         //Get the data point, multiply by number of servings, and add to total in result
         _dailyFoodsWithFood.value.forEach { entry ->
-            result["Calories"] = result.getValue("Calories") + (entry.food.calories * entry.dailyFoods.numServings)
-            result["Protein"] = result.getValue("Protein") + (entry.food.protein * entry.dailyFoods.numServings)
-            result["Fat"] = result.getValue("Fat") + (entry.food.totalFat * entry.dailyFoods.numServings)
-            result["Carbohydrates"] = result.getValue("Carbohydrates") + (entry.food.carbohydrates * entry.dailyFoods.numServings)
-            result["Saturated Fat"] = result.getValue("Saturated Fat") + (entry.food.saturatedFat * entry.dailyFoods.numServings)
-            result["Fiber"] = result.getValue("Fiber") + (entry.food.fiber * entry.dailyFoods.numServings)
-
+            result["Calories"] = result.getValue("Calories") +
+                    (entry.food.calories * entry.dailyFoods.numServings)
+            result["Protein"] = result.getValue("Protein") +
+                    (entry.food.protein * entry.dailyFoods.numServings)
+            result["Fat"] = result.getValue("Fat") +
+                    (entry.food.totalFat * entry.dailyFoods.numServings)
+            result["Carbohydrates"] = result.getValue("Carbohydrates") +
+                    (entry.food.carbohydrates * entry.dailyFoods.numServings)
+            result["Saturated Fat"] = result.getValue("Saturated Fat") +
+                    (entry.food.saturatedFat * entry.dailyFoods.numServings)
+            result["Fiber"] = result.getValue("Fiber") +
+                    (entry.food.fiber * entry.dailyFoods.numServings)
         }
 
         return result

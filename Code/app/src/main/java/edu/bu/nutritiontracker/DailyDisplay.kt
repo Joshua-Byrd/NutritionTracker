@@ -1,5 +1,6 @@
 package edu.bu.nutritiontracker
 
+import android.annotation.SuppressLint
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,8 +35,6 @@ fun DailyDisplay(
     date: Date,
     viewModel: FoodViewModel = FoodViewModel()) {
 
-    val foodMap = viewModel.dailyFoodsMap.collectAsState()
-
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,6 +65,7 @@ fun DailyDisplay(
 
 }
 
+@SuppressLint("SimpleDateFormat")
 @Composable
 fun DateDisplay(date: Date) {
     //display date

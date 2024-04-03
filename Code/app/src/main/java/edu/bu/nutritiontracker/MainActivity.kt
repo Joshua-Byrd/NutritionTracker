@@ -11,14 +11,24 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
 import edu.bu.nutritiontracker.data.Food
+import edu.bu.nutritiontracker.data.NutritionDatabase
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
 import edu.bu.nutritiontracker.util.getTestFoodList
 import java.util.Date
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var nutritionDatabase: NutritionDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        nutritionDatabase = Room.databaseBuilder(
+            applicationContext, NutritionDatabase::class.java,
+            "nutritition-db"
+        ).build()
+
         setContent {
             NutritionTrackerTheme {
                 // A surface container using the 'background' color from the theme
@@ -26,7 +36,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
                     NutritionTrackerApp()
                 }
             }
