@@ -17,25 +17,25 @@ import edu.bu.nutritiontracker.data.FoodViewModel
 @Composable
 fun FoodList(viewModel: FoodViewModel = FoodViewModel()) {
 
-    val foodMap = viewModel.dailyFoodsMap.collectAsState()
+    val foodList = viewModel.dailyFoodsWithFood.collectAsState()
 
     //display full list of foods eaten
     LazyColumn (
     ){
-        foodMap.value.forEach { entry ->
+        foodList.value.forEach { entry ->
             item {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(entry.key.name)
-                    Text("${entry.value} serving(s)",
+                    Text(entry.food.name)
+                    Text("${entry.dailyFoods.numServings} serving(s)",
                         modifier = Modifier
                             .widthIn(min = 48.dp),
                         textAlign = TextAlign.Start
                     )
-                    val formattedCals = String.format("%.1f",(entry.key.calories * entry.value))
+                    val formattedCals = String.format("%.1f",(entry.food.calories * entry.dailyFoods.numServings))
                     Text("$formattedCals cals")
                 }
             }

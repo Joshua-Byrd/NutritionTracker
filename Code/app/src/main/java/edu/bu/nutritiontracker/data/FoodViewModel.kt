@@ -11,23 +11,17 @@ class FoodViewModel(
     private val dailyFoodsDao: DailyFoodsDao
 ): ViewModel() {
 
-
-    //Just for testing purposes. These will eventually come from a Model
-
-    private val _dailyFoodsMap = MutableStateFlow<Map<Food, Int>>(emptyMap())
-
-    //This will come from foodDao after searching for specific food
+    private val _dailyFoodsWithFood = MutableStateFlow<List<DailyFoodEntryWithFood>>((emptyList()))
     private val _foodSearchResultList = MutableStateFlow<List<Food>>(emptyList())
     private val _food = MutableStateFlow<Food?>(null)
 
     //expose immutables
-    val dailyFoodsMap = _dailyFoodsMap.asStateFlow()
     val foodSearchResultList = _foodSearchResultList.asStateFlow()
     val food = _food.asStateFlow()
+    val dailyFoodsWithFood = _dailyFoodsWithFood.asStateFlow()
 
     init {
         //all of these are just for testing
-        _dailyFoodsMap.value = getTestFoodMap()
         _foodSearchResultList.value = getTestFoodList()
         _food.value = Food(1,"apple", "1 - medium", 95.6, 0.5, 0.3,
             25.1, 0.0, 4.4)
@@ -49,13 +43,13 @@ class FoodViewModel(
         )
 
         //Get the data point, multiply by number of servings, and add to total in result
-        _dailyFoodsMap.value.forEach { entry ->
-            result["Calories"] = result.getValue("Calories") + (entry.key.calories * entry.value)
-            result["Protein"] = result.getValue("Protein") + (entry.key.protein * entry.value)
-            result["Fat"] = result.getValue("Fat") + (entry.key.totalFat * entry.value)
-            result["Carbohydrates"] = result.getValue("Carbohydrates") + (entry.key.carbohydrates * entry.value)
-            result["Saturated Fat"] = result.getValue("Saturated Fat") + (entry.key.saturatedFat * entry.value)
-            result["Fiber"] = result.getValue("Fiber") + (entry.key.fiber * entry.value)
+        _dailyFoodsWithFood.value.forEach { entry ->
+            result["Calories"] = result.getValue("Calories") + (entry.food.calories * entry.dailyFoods.numServings)
+            result["Protein"] = result.getValue("Protein") + (entry.food.protein * entry.dailyFoods.numServings)
+            result["Fat"] = result.getValue("Fat") + (entry.food.totalFat * entry.dailyFoods.numServings)
+            result["Carbohydrates"] = result.getValue("Carbohydrates") + (entry.food.carbohydrates * entry.dailyFoods.numServings)
+            result["Saturated Fat"] = result.getValue("Saturated Fat") + (entry.food.saturatedFat * entry.dailyFoods.numServings)
+            result["Fiber"] = result.getValue("Fiber") + (entry.food.fiber * entry.dailyFoods.numServings)
 
         }
 

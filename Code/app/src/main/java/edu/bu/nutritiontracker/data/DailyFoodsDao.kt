@@ -17,7 +17,7 @@ interface DailyFoodsDao {
     fun deleteDailyFoods(entry:DailyFoods)
 
     @Query ("SELECT * FROM DailyFoods WHERE date = :searchDate")
-    fun getDailyFoodsByDate(searchDate: LocalDateTime)
+    fun getDailyFoodsWithFoodByDate(searchDate: LocalDateTime): Flow<List<DailyFoodEntryWithFood>>
 
     @Query("SELECT * FROM DailyFoods ORDER BY date DESC LIMIT 20")
     fun getRecentFoodsList(): Flow<List<DailyFoods>>
