@@ -12,12 +12,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
+import dagger.hilt.android.AndroidEntryPoint
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.data.NutritionDatabase
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
 import edu.bu.nutritiontracker.util.getTestFoodList
 import java.util.Date
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     lateinit var nutritionDatabase: NutritionDatabase

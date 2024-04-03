@@ -3,8 +3,9 @@ package edu.bu.nutritiontracker.data.repository
 import edu.bu.nutritiontracker.data.Food
 import edu.bu.nutritiontracker.data.FoodDao
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class FoodRepository(private val foodDao: FoodDao) {
+class FoodRepository @Inject constructor(private val foodDao: FoodDao) {
 
     fun insertFood(food: Food) {
         foodDao.insertFood(food)
