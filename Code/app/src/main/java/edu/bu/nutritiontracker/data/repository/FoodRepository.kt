@@ -1,17 +1,17 @@
 package edu.bu.nutritiontracker.data.repository
 
-import edu.bu.nutritiontracker.data.Food
-import edu.bu.nutritiontracker.data.FoodDao
+import edu.bu.nutritiontracker.data.db.Food
+import edu.bu.nutritiontracker.data.db.FoodDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class FoodRepository @Inject constructor(private val foodDao: FoodDao) {
 
-    fun insertFood(food: Food) {
+    suspend fun insertFood(food: Food) {
         foodDao.insertFood(food)
     }
 
-    fun deleteFood(food: Food) {
+    suspend fun deleteFood(food: Food) {
         foodDao.deleteFood(food)
     }
 

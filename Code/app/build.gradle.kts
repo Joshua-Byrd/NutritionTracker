@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -73,9 +74,13 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     //room
+    implementation(libs.hilt.android)
     implementation(libs.androidx.room.ktx)
+    implementation("androidx.hilt:hilt-work:1.2.0")
+    kapt(libs.hilt.android.compiler)
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
     kapt(libs.androidx.room.compiler)
-
+//    ksp(libs.androidx.room.compiler)
 }
 
 kapt {

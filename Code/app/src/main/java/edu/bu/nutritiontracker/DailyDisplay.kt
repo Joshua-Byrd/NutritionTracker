@@ -29,11 +29,12 @@ import edu.bu.nutritiontracker.data.FoodViewModel
 /**
  * Displays date, nutrition summary and list of foods eaten
  */
+
 @Composable
 fun DailyDisplay(
     navController: NavController,
-    date: Date,
-    viewModel: FoodViewModel = FoodViewModel()) {
+    date: Date
+) {
 
     Column (
         verticalArrangement = Arrangement.Top,
@@ -74,11 +75,11 @@ fun DateDisplay(date: Date) {
 }
 
 @Composable
-fun Summary(viewModel: FoodViewModel = FoodViewModel()) {
+fun Summary(viewModel: FoodViewModel = hiltViewModel()) {
     //display summaries
     Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-    val foodSummary = viewModel.getFoodListSummary()
-    foodSummary.forEach {
+    val foodSummary = viewModel.foodSummary.collectAsState()
+    foodSummary.value.forEach {
             entry ->
         Row (
             horizontalArrangement = Arrangement.SpaceBetween,

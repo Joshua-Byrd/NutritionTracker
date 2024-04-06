@@ -1,6 +1,5 @@
 package edu.bu.nutritiontracker.util
-import androidx.compose.runtime.snapshots.SnapshotStateMap
-import edu.bu.nutritiontracker.data.Food
+import edu.bu.nutritiontracker.data.db.Food
 
 /**
  * Provides utility functions to other classes/Activities

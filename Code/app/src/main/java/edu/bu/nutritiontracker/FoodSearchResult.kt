@@ -20,12 +20,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.FoodViewModel
+import javax.inject.Inject
 
 @Composable
 fun FoodSearchResult(
     navController: NavController,
     name: String,
-    viewModel: FoodViewModel = FoodViewModel()
+    viewModel: FoodViewModel = hiltViewModel()
 ) {
 
     val foodList = viewModel.foodSearchResultList.collectAsState()

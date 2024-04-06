@@ -1,4 +1,4 @@
-package edu.bu.nutritiontracker.data
+package edu.bu.nutritiontracker.data.db
 
 import androidx.room.Embedded
 import androidx.room.Relation

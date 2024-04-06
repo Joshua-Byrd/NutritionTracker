@@ -1,4 +1,4 @@
-package edu.bu.nutritiontracker.data
+package edu.bu.nutritiontracker.data.db
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -8,14 +8,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FoodDao {
-
-    //Should these be asynchronous using suspend?
-
     @Insert
-    fun insertFood(food: Food)
+    suspend fun insertFood(food: Food)
 
     @Delete
-    fun deleteFood(food: Food)
+    suspend fun deleteFood(food: Food)
 
     @Query("SELECT * FROM FOOD WHERE foodId = :searchId")
     fun getFoodById(searchId: Int): Flow<Food>

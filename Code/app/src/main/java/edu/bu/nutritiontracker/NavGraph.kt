@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import java.util.Date
 
 @Composable
-fun NutritionTrackerApp() {
+fun NavGraph() {
 
     //Navigation
     val navController = rememberNavController()

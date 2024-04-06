@@ -1,8 +1,7 @@
-package edu.bu.nutritiontracker.data
+package edu.bu.nutritiontracker.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import edu.bu.nutritiontracker.util.DateTimeConverter
 
@@ -13,7 +12,7 @@ import edu.bu.nutritiontracker.util.DateTimeConverter
 @TypeConverters(DateTimeConverter::class)
 abstract class NutritionDatabase: RoomDatabase() {
 
-    abstract fun foodDao():  FoodDao
+    abstract fun foodDao(): FoodDao
     abstract fun dailyFoodsDao(): DailyFoodsDao
 
 }

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.components.BottomMenu
-import edu.bu.nutritiontracker.data.Food
+import edu.bu.nutritiontracker.data.db.Food
 import edu.bu.nutritiontracker.data.FoodViewModel
 
 @Composable

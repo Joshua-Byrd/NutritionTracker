@@ -2,19 +2,19 @@ package edu.bu.nutritiontracker.data
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
+import edu.bu.nutritiontracker.data.db.Food
 import edu.bu.nutritiontracker.data.repository.DailyFoodsRepository
 import edu.bu.nutritiontracker.data.repository.FoodRepository
 import edu.bu.nutritiontracker.util.getTestFoodList
-import edu.bu.nutritiontracker.util.getTestFoodMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.toList
 import javax.inject.Inject
 
 @HiltViewModel
 class FoodViewModel @Inject constructor(
-    foodRepository: FoodRepository,
-    dailyFoodsRepository: DailyFoodsRepository
+    private val foodRepository: FoodRepository,
+    private val dailyFoodsRepository: DailyFoodsRepository
     ): ViewModel() {
 
     private val _dailyFoodsWithFood = MutableStateFlow<List<DailyFoodEntryWithFood>>(emptyList())

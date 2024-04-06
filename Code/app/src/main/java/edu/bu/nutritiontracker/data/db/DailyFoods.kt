@@ -1,11 +1,9 @@
-package edu.bu.nutritiontracker.data
+package edu.bu.nutritiontracker.data.db
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import androidx.room.util.TableInfo
 import java.time.LocalDateTime
-import java.util.Date
 
 @Entity(
     foreignKeys = [

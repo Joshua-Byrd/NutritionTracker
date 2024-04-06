@@ -1,19 +1,19 @@
 package edu.bu.nutritiontracker.data.repository
 
-import edu.bu.nutritiontracker.data.DailyFoodEntryWithFood
-import edu.bu.nutritiontracker.data.DailyFoods
-import edu.bu.nutritiontracker.data.DailyFoodsDao
+import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
+import edu.bu.nutritiontracker.data.db.DailyFoods
+import edu.bu.nutritiontracker.data.db.DailyFoodsDao
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 class DailyFoodsRepository @Inject constructor(private val dailyFoodsDao: DailyFoodsDao) {
 
-    fun insertDailyFoods(entry: DailyFoods) {
+    suspend fun insertDailyFoods(entry: DailyFoods) {
         dailyFoodsDao.insertDailyFoods(entry)
     }
 
-    fun deleteDailyFoods(entry: DailyFoods) {
+    suspend fun deleteDailyFoods(entry: DailyFoods) {
         dailyFoodsDao.deleteDailyFoods(entry)
     }
 

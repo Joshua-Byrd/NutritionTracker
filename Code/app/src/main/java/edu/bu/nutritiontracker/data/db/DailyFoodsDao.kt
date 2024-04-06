@@ -1,4 +1,4 @@
-package edu.bu.nutritiontracker.data
+package edu.bu.nutritiontracker.data.db
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -9,12 +9,10 @@ import java.time.LocalDateTime
 
 @Dao
 interface DailyFoodsDao {
-
     @Insert
-    fun insertDailyFoods(entry:DailyFoods)
-
+    suspend fun insertDailyFoods(entry: DailyFoods)
     @Delete
-    fun deleteDailyFoods(entry:DailyFoods)
+    suspend fun deleteDailyFoods(entry: DailyFoods)
 
     @Query ("SELECT * FROM DailyFoods WHERE date = :searchDate")
     fun getDailyFoodsWithFoodByDate(searchDate: LocalDateTime): Flow<List<DailyFoodEntryWithFood>>
