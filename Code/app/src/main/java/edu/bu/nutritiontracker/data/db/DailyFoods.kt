@@ -17,7 +17,7 @@ import java.time.LocalDateTime
 
 data class DailyFoods(
     @PrimaryKey(autoGenerate = true)
-    var foodEntryId: Int,
+    var foodEntryId: Int = 0,
     var foodId: Int, //foreign key to food
     var numServings: Int,
     var date: LocalDateTime = LocalDateTime.now()
