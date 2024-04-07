@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
 import javax.inject.Inject
 
+
 class DailyFoodsRepository @Inject constructor(private val dailyFoodsDao: DailyFoodsDao) {
 
     suspend fun insertDailyFoods(entry: DailyFoods) {

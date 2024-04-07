@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import edu.bu.nutritiontracker.components.BottomMenu
@@ -70,8 +71,7 @@ fun FoodSearchResult(
     showBackground = true,
     showSystemUi = true)
 @Composable
-fun FoodSearchResultPreview(viewModel: FoodViewModel = FoodViewModel()){
-    val foodList = viewModel.foodSearchResultList.collectAsState()
+fun FoodSearchResultPreview(viewModel: FoodViewModel = hiltViewModel()){
     val navController = rememberNavController()
     FoodSearchResult(navController, name = "Apple")
 

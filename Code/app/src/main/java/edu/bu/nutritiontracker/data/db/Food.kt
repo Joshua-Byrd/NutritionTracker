@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 @Entity
 data class Food(
     @PrimaryKey(autoGenerate = true)
-    val foodId: Int,
-    val name: String,
-    val serving: String,
-    val calories: Double,
-    val protein: Double,
-    val totalFat: Double,
-    val carbohydrates: Double,
-    val saturatedFat: Double,
-    val fiber: Double
+    var foodId: Int,
+    var name: String,
+    var serving: String,
+    var calories: Double,
+    var protein: Double,
+    var totalFat: Double,
+    var carbohydrates: Double,
+    var saturatedFat: Double,
+    var fiber: Double
 ) {}

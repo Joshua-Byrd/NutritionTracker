@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
+
 @HiltViewModel
 class FoodViewModel @Inject constructor(
     private val foodRepository: FoodRepository,
@@ -33,10 +34,6 @@ class FoodViewModel @Inject constructor(
 
 
     init {
-        //all of these are just for testing
-        _foodSearchResultList.value = getTestFoodList()
-        _food.value = Food(1,"apple", "1 - medium", 95.6, 0.5, 0.3,
-            25.1, 0.0, 4.4)
     }
 
 

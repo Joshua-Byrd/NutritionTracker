@@ -14,10 +14,11 @@ import java.time.LocalDateTime
         )
     ]
 )
+
 data class DailyFoods(
     @PrimaryKey(autoGenerate = true)
-    val foodEntryId: Int,
-    val foodId: Int, //foreign key to food
-    val numServings: Int,
-    val date: LocalDateTime = LocalDateTime.now()
+    var foodEntryId: Int,
+    var foodId: Int, //foreign key to food
+    var numServings: Int,
+    var date: LocalDateTime = LocalDateTime.now()
 ){}
