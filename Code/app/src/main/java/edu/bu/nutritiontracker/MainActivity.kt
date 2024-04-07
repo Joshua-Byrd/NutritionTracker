@@ -11,16 +11,12 @@ import androidx.room.Room
 import dagger.hilt.android.AndroidEntryPoint
 import edu.bu.nutritiontracker.data.db.NutritionDatabase
 import edu.bu.nutritiontracker.ui.theme.NutritionTrackerTheme
+import javax.inject.Singleton
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val nutritionDatabase = Room.databaseBuilder(
-            applicationContext, NutritionDatabase::class.java,
-            "nutrition-db"
-        ).build()
 
         setContent {
             NutritionTrackerTheme {

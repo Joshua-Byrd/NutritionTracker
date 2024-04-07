@@ -12,10 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import edu.bu.nutritiontracker.data.FoodViewModel
 
 @Composable
-fun FoodList(viewModel: FoodViewModel = FoodViewModel()) {
+fun FoodList(viewModel: FoodViewModel = hiltViewModel()) {
 
     val foodList = viewModel.dailyFoodsWithFood.collectAsState()
 
