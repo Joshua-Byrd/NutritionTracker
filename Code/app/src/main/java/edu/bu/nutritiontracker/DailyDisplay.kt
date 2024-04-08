@@ -96,23 +96,23 @@ fun DateDisplay(date: LocalDateTime) {
     Text(formattedDate, fontSize = 24.sp, fontWeight = FontWeight.Bold)
 }
 
-@Composable
-fun Summary(viewModel: FoodViewModel = hiltViewModel()) {
-    //display summaries
-    Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-    val foodSummary = viewModel.foodSummary.collectAsState()
-    foodSummary.value.forEach {
-            entry ->
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-        ){
-            Text(entry.key)
-            val formattedValue = String.format("%.1f", entry.value)
-            Text(formattedValue)
-        }
-    }
-}
+//@Composable
+//fun Summary(viewModel: FoodViewModel = hiltViewModel()) {
+//    //display summaries
+//    Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+//    val foodSummary = viewModel.foodSummary.collectAsState()
+//    foodSummary.value.forEach {
+//            entry ->
+//        Row (
+//            horizontalArrangement = Arrangement.SpaceBetween,
+//            modifier = Modifier.fillMaxWidth()
+//        ){
+//            Text(entry.key)
+//            val formattedValue = String.format("%.1f", entry.value)
+//            Text(formattedValue)
+//        }
+//    }
+//}
 
 
 //This is here just to having a UI while making sure the database installs
