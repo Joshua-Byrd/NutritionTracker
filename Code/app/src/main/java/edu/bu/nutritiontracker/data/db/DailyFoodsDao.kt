@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @Dao
 interface DailyFoodsDao {
@@ -18,7 +18,7 @@ interface DailyFoodsDao {
     suspend fun getFoodEntryById(searchId: Int): DailyFoods
 
     @Query ("SELECT * FROM DailyFoods WHERE date = :searchDate")
-    fun getDailyFoodsWithFoodByDate(searchDate: LocalDateTime): Flow<List<DailyFoodEntryWithFood>>
+    fun getDailyFoodsWithFoodByDate(searchDate: LocalDate): Flow<List<DailyFoodEntryWithFood>>
 
     @Query("SELECT * FROM DailyFoods ORDER BY date DESC LIMIT 20")
     fun getRecentFoodsList(): Flow<List<DailyFoodEntryWithFood>>

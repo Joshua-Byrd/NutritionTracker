@@ -4,7 +4,7 @@ import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
 import edu.bu.nutritiontracker.data.db.DailyFoods
 import edu.bu.nutritiontracker.data.db.DailyFoodsDao
 import kotlinx.coroutines.flow.Flow
-import java.time.LocalDateTime
+import java.time.LocalDate
 import javax.inject.Inject
 
 
@@ -22,7 +22,7 @@ class DailyFoodsRepository @Inject constructor(private val dailyFoodsDao: DailyF
         dailyFoodsDao.getFoodEntryById(searchId)
     }
 
-    fun getDailyFoodsWithFoodByDate(searchDate: LocalDateTime): Flow<List<DailyFoodEntryWithFood>> {
+    fun getDailyFoodsWithFoodByDate(searchDate: LocalDate): Flow<List<DailyFoodEntryWithFood>> {
         return dailyFoodsDao.getDailyFoodsWithFoodByDate(searchDate)
     }
 

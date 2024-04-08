@@ -42,6 +42,7 @@ import java.util.Date
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
 import edu.bu.nutritiontracker.data.FoodViewModel
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 
@@ -54,7 +55,7 @@ fun DailyDisplay(
     navController: NavController,
     date: Date
 ) {
-    ScaffoldExample(LocalDateTime.now())
+    ScaffoldExample(LocalDate.now())
 
 //    Column (
 //        verticalArrangement = Arrangement.Top,
@@ -117,7 +118,7 @@ fun Summary(viewModel: FoodViewModel = hiltViewModel()) {
 //This is here just to having a UI while making sure the database installs
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScaffoldExample(date:LocalDateTime) {
+fun ScaffoldExample(date: LocalDate) {
     var presses by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -128,7 +129,7 @@ fun ScaffoldExample(date:LocalDateTime) {
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("$date")
+                    Text("${date}")
                 }
             )
         },

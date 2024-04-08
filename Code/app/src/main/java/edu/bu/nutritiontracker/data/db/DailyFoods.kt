@@ -3,6 +3,7 @@ package edu.bu.nutritiontracker.data.db
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity(
@@ -20,5 +21,5 @@ data class DailyFoods(
     var foodEntryId: Int = 0,
     var foodId: Int, //foreign key to food
     var numServings: Int,
-    var date: LocalDateTime = LocalDateTime.now()
+    var date: LocalDate = LocalDate.now()
 ){}

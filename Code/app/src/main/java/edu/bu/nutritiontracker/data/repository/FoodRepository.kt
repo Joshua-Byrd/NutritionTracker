@@ -15,7 +15,7 @@ class FoodRepository @Inject constructor(private val foodDao: FoodDao) {
         foodDao.deleteFood(food)
     }
 
-    fun getFoodById(searchId: Int): Flow<Food> {
+    suspend fun getFoodById(searchId: Int): Food {
         return foodDao.getFoodById(searchId)
     }
 

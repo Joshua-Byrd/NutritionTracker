@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -53,6 +53,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -72,16 +73,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation(libs.androidx.hilt.navigation.compose)
 
     //room
     implementation(libs.hilt.android)
     implementation(libs.androidx.room.ktx)
-    implementation("androidx.hilt:hilt-work:1.2.0")
-    kapt(libs.hilt.android.compiler)
-    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    implementation(libs.androidx.hilt.work)
+//    kapt(libs.hilt.android.compiler)
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-android-compiler:2.50")
+//    kapt(libs.androidx.hilt.compiler)
     kapt(libs.androidx.room.compiler)
-//    ksp(libs.androidx.room.compiler)
 }
 
 kapt {
