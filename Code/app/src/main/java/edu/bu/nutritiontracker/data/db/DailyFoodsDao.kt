@@ -12,7 +12,7 @@ interface DailyFoodsDao {
     @Insert
     suspend fun insertDailyFoods(entry: DailyFoods)
     @Delete
-    suspend fun deleteDailyFoods(entry: DailyFoods)
+    suspend fun deleteDailyFoods(foodEntry: DailyFoods)
 
     @Query ("SELECT * FROM dailyFoods WHERE foodEntryId = :searchId")
     suspend fun getFoodEntryById(searchId: Int): DailyFoods

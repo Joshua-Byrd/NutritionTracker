@@ -14,8 +14,8 @@ class DailyFoodsRepository @Inject constructor(private val dailyFoodsDao: DailyF
         dailyFoodsDao.insertDailyFoods(entry)
     }
 
-    suspend fun deleteDailyFoods(entry: DailyFoods) {
-        dailyFoodsDao.deleteDailyFoods(entry)
+    suspend fun deleteDailyFoods(foodEntry: DailyFoods) {
+        dailyFoodsDao.deleteDailyFoods(foodEntry)
     }
 
     suspend fun getFoodEntryById(searchId: Int) {

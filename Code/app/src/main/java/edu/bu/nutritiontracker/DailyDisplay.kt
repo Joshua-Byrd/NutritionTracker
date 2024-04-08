@@ -129,7 +129,7 @@ fun ScaffoldExample(date: LocalDate) {
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("${date}")
+                    Text(SimpleDateFormat("MM/dd/yyyy").format(date))
                 }
             )
         },
