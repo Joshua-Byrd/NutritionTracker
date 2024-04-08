@@ -18,6 +18,10 @@ class DailyFoodsRepository @Inject constructor(private val dailyFoodsDao: DailyF
         dailyFoodsDao.deleteDailyFoods(entry)
     }
 
+    suspend fun getFoodEntryById(searchId: Int) {
+        dailyFoodsDao.getFoodEntryById(searchId)
+    }
+
     fun getDailyFoodsWithFoodByDate(searchDate: LocalDateTime): Flow<List<DailyFoodEntryWithFood>> {
         return dailyFoodsDao.getDailyFoodsWithFoodByDate(searchDate)
     }

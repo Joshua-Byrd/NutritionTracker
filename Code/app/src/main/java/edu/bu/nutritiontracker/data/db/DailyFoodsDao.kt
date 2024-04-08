@@ -14,6 +14,9 @@ interface DailyFoodsDao {
     @Delete
     suspend fun deleteDailyFoods(entry: DailyFoods)
 
+    @Query ("SELECT * FROM dailyFoods WHERE foodEntryId = :searchId")
+    suspend fun getFoodEntryById(searchId: Int): DailyFoods
+
     @Query ("SELECT * FROM DailyFoods WHERE date = :searchDate")
     fun getDailyFoodsWithFoodByDate(searchDate: LocalDateTime): Flow<List<DailyFoodEntryWithFood>>
 
