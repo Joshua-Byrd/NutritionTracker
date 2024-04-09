@@ -30,39 +30,39 @@ fun FoodSearchResult(
     viewModel: FoodViewModel = hiltViewModel()
 ) {
 
-    val foodList = viewModel.foodSearchResultList.collectAsState()
-
-    Column (
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .padding(16.dp)
-    ){
-        Text("Results for $name", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-
-        Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-
-        foodList.value.forEach{
-                food ->
-            Row (
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ){
-                Text(food.name.toString())
-                Text(food.calories.toString())
-            }
-        }
-
-        Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-
-        BottomMenu(navController) {
-
-        }
-    }
+//    val foodList = viewModel.foodSearchResultList.collectAsState()
+//
+//    Column (
+//        verticalArrangement = Arrangement.Top,
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        modifier = Modifier
+//            .padding(16.dp)
+//    ){
+//        Text("Results for $name", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+//
+//        Spacer(
+//            modifier = Modifier.height(10.dp)
+//        )
+//
+//        foodList.value.forEach{
+//                food ->
+//            Row (
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            ){
+//                Text(food.name.toString())
+//                Text(food.calories.toString())
+//            }
+//        }
+//
+//        Spacer(
+//            modifier = Modifier.height(10.dp)
+//        )
+//
+//        BottomMenu(navController) {
+//
+//        }
+//    }
 
 
 }
@@ -73,6 +73,6 @@ fun FoodSearchResult(
 @Composable
 fun FoodSearchResultPreview(viewModel: FoodViewModel = hiltViewModel()){
     val navController = rememberNavController()
-    FoodSearchResult(navController, name = "Apple")
+//    FoodSearchResult(navController, name = "Apple")
 
 }

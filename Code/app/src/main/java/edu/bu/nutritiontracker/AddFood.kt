@@ -30,99 +30,99 @@ import edu.bu.nutritiontracker.data.FoodViewModel
 @Composable
 fun AddFood(navController: NavController, viewModel: FoodViewModel = hiltViewModel()) {
 
-    val food = viewModel.food.collectAsState()
-
-    Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxSize()
-    ) {
-        Text("Add Food", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-
-        Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-
-        FoodPropertiesDisplay(food.value)
-
-        Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-
-        AddFoodConfirm()
-
-        Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-
-        BottomMenu (navController){
-
-        }
-
-
-    }
-}
-
-@Composable
-fun FoodPropertiesDisplay(food: Food?){
-    Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        if(food != null) {
-            Text("${food.name}, ${food.serving}", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text("Calories")
-                Text(food.calories.toString())
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text("Protein")
-                Text(food.protein.toString())
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text("Fat")
-                Text(food.totalFat.toString())
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text("Carbohydrates")
-                Text(food.carbohydrates.toString())
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text("Saturated Fat")
-                Text(food.saturatedFat.toString())
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text("Fiber")
-                Text(food.fiber.toString())
-            }
-        }
-    }
+//    val food = viewModel.food.collectAsState()
+//
+//    Column(
+//        verticalArrangement = Arrangement.Top,
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        modifier = Modifier
+//            .padding(16.dp)
+//            .fillMaxSize()
+//    ) {
+//        Text("Add Food", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+//
+//        Spacer(
+//            modifier = Modifier.height(10.dp)
+//        )
+//
+//        FoodPropertiesDisplay(food.value)
+//
+//        Spacer(
+//            modifier = Modifier.height(10.dp)
+//        )
+//
+//        AddFoodConfirm()
+//
+//        Spacer(
+//            modifier = Modifier.height(10.dp)
+//        )
+//
+//        BottomMenu (navController){
+//
+//        }
+//
+//
+//    }
+//}
+//
+//@Composable
+//fun FoodPropertiesDisplay(food: Food?){
+//    Column(
+//        horizontalAlignment = Alignment.Start,
+//        modifier = Modifier.fillMaxWidth()
+//    ) {
+//        if(food != null) {
+//            Text("${food.name}, ${food.serving}", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//            {
+//                Text("Calories")
+//                Text(food.calories.toString())
+//            }
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//            {
+//                Text("Protein")
+//                Text(food.protein.toString())
+//            }
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//            {
+//                Text("Fat")
+//                Text(food.totalFat.toString())
+//            }
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//            {
+//                Text("Carbohydrates")
+//                Text(food.carbohydrates.toString())
+//            }
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//            {
+//                Text("Saturated Fat")
+//                Text(food.saturatedFat.toString())
+//            }
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//            {
+//                Text("Fiber")
+//                Text(food.fiber.toString())
+//            }
+//        }
+//    }
 }
 
 @Composable

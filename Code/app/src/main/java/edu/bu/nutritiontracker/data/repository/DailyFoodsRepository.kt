@@ -8,7 +8,9 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 
-class DailyFoodsRepository @Inject constructor(private val dailyFoodsDao: DailyFoodsDao) {
+class DailyFoodsRepository @Inject constructor(
+    private val dailyFoodsDao: DailyFoodsDao,
+    ) {
 
     suspend fun insertDailyFoods(entry: DailyFoods) {
         dailyFoodsDao.insertDailyFoods(entry)
@@ -30,7 +32,8 @@ class DailyFoodsRepository @Inject constructor(private val dailyFoodsDao: DailyF
         return dailyFoodsDao.getRecentFoodsList()
     }
 
-    fun getFoodListSummary(dailyFoodsWithFood: List<DailyFoodEntryWithFood>): Map<String, Double>{
+
+    private fun summarizeFoodList(dailyFoodsWithFood: List<DailyFoodEntryWithFood>): Map<String, Double>{
 
         val result = mutableMapOf<String, Double>(
             "Calories" to 0.0,
