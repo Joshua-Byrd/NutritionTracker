@@ -41,7 +41,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
+import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.FoodViewModel
+import java.lang.Exception
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -96,10 +98,11 @@ fun DateDisplay(date: LocalDateTime) {
     Text(formattedDate, fontSize = 24.sp, fontWeight = FontWeight.Bold)
 }
 
-//@Composable
-//fun Summary(viewModel: FoodViewModel = hiltViewModel()) {
-//    //display summaries
-//    Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+@Composable
+fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
+
+    //display summaries
+    Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
 //    val foodSummary = viewModel.foodSummary.collectAsState()
 //    foodSummary.value.forEach {
 //            entry ->
@@ -112,7 +115,7 @@ fun DateDisplay(date: LocalDateTime) {
 //            Text(formattedValue)
 //        }
 //    }
-//}
+}
 
 
 //This is here just to having a UI while making sure the database installs
@@ -133,19 +136,7 @@ fun ScaffoldExample(date: LocalDate) {
                 }
             )
         },
-        bottomBar = {
-            BottomAppBar(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    text = "Bottom app bar",
-                )
-            }
-        },
+
         floatingActionButton = {
             FloatingActionButton(onClick = { presses++ }) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
@@ -157,17 +148,10 @@ fun ScaffoldExample(date: LocalDate) {
                 .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text =
-                """
-                    This is an example of a scaffold. It uses the Scaffold composable's parameters to create a screen with a simple top app bar, bottom app bar, and floating action button.
+            Text("Summary will go here")
 
-                    It also contains some basic inner content, such as this text.
+            FoodList()
 
-                    You have pressed the floating action button $presses times.
-                """.trimIndent(),
-            )
         }
     }
 }

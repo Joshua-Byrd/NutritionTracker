@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation ("com.opencsv:opencsv:5.6")
 
     //room
     implementation(libs.hilt.android)

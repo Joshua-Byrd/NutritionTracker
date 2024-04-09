@@ -22,6 +22,7 @@ import edu.bu.nutritiontracker.data.FoodViewModel
 fun FoodList(viewModel: DailyFoodsViewModel = hiltViewModel()) {
 
     val dailyFoodsUiState by viewModel.foodsUiState.collectAsState()
+
     val foodList = dailyFoodsUiState.dailyFoodsWithFoodByDate
     //display full list of foods eaten
     LazyColumn (

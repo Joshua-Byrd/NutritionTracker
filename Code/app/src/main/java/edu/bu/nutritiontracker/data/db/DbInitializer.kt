@@ -2,12 +2,15 @@ package edu.bu.nutritiontracker.data.db
 
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.opencsv.CSVReaderBuilder
 import dagger.internal.Provider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.io.FileReader
 import java.time.LocalDate
+
 
 class DbInitializer(
     private val foodProvider: Provider<FoodDao>,
@@ -22,55 +25,29 @@ class DbInitializer(
         }
     }
 
+    /**
+     * Prepopulates database with data from foods.csv
+     */
     private suspend fun populateDatabase() {
-        //initial foods
-        val apple = Food(
-            name = "Apple, fresh",
-            serving = "1 medium",
-            calories = 95.0,
-            protein = 0.5,
-            totalFat = 0.3,
-            carbohydrates = 25.1,
-            saturatedFat = 0.0,
-            fiber = 4.4
-        )
-        val whiteRice = Food(
-            name = "Rice, white, steamed",
-            serving = "1 cup",
-            calories = 210.0,
-            protein = 4.2,
-            totalFat = 0.4,
-            carbohydrates = 44.6,
-            saturatedFat = 0.5,
-            fiber = 0.3
-        )
 
-        val chickenBreast = Food(
-            name = "Chicken breast, boneless, skinless",
-            serving = "1 oz",
-            calories = 42.0,
-            protein = 8.6,
-            totalFat = 0.9,
-            carbohydrates = 0.0,
-            saturatedFat = 0.3,
-            fiber = 0.0
-        )
+        val csvReader = CSVReaderBuilder(FileReader("foods.csv")).build()
 
-        //initial DailyFoods entries
-        val dailyFoodEntry1 = DailyFoods(
-            foodId = 1,
-            numServings = 3,
-            date = LocalDate.now(),
-        )
-        val dailyFoodEntry2 = DailyFoods(
-            foodId = 2,
-            numServings = 2,
-            date = LocalDate.now(),
-        )
+        var record: Array<String>?
 
-        foodProvider.get().insertFood(apple)
-        foodProvider.get().insertFood(whiteRice)
-        foodProvider.get().insertFood(chickenBreast)
+        while (csvReader.readNext().also {record = it} != null) {
+            val food = Food(
+                name = record!![0],
+                serving = record!![1],
+                calories = record!![2].toDouble(),
+                protein = record!![3].toDouble(),
+                totalFat = record!![4].toDouble(),
+                carbohydrates = record!![5].toDouble(),
+                saturatedFat = record!![6].toDouble(),
+                fiber = record!![7].toDouble()
+            )
+
+            foodProvider.get().insertFood(food)
+        }
 
     }
 
