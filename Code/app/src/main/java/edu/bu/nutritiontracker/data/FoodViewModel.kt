@@ -1,29 +1,21 @@
 package edu.bu.nutritiontracker.data
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
-import edu.bu.nutritiontracker.data.db.DailyFoods
 import edu.bu.nutritiontracker.data.db.Food
-import edu.bu.nutritiontracker.data.db.NutritionDatabase
-import edu.bu.nutritiontracker.data.repository.DailyFoodsRepository
 import edu.bu.nutritiontracker.data.repository.FoodRepository
-import edu.bu.nutritiontracker.util.getTestFoodList
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import javax.inject.Inject
 
-data class foodSearchState (
-    val foodSearchResults: List<Food> = emptyList()
+data class FoodSearchState (
+    val foodSearchResults: List<Food> = emptyList(),
+    val food: Food? = null
 )
 
 @HiltViewModel
@@ -33,13 +25,16 @@ class FoodViewModel @Inject constructor(
         private val _name: MutableStateFlow<String> = MutableStateFlow("")
         val name: StateFlow<String> = _name
 
-        private val _foodUiState: MutableStateFlow<foodSearchState>
-        = MutableStateFlow(foodSearchState())
+        private val _foodId: MutableStateFlow<Int> = MutableStateFlow(0)
+        val foodId: StateFlow<Int> = _foodId
 
-        val foodUiState: StateFlow<foodSearchState> = _foodUiState.stateIn(
+        private val _foodUiState: MutableStateFlow<FoodSearchState>
+        = MutableStateFlow(FoodSearchState())
+
+        val foodUiState: StateFlow<FoodSearchState> = _foodUiState.stateIn(
             viewModelScope,
             SharingStarted.Eagerly,
-            foodSearchState()
+            FoodSearchState()
         )
     init {
         viewModelScope.launch{
@@ -50,9 +45,24 @@ class FoodViewModel @Inject constructor(
             }
         }
 
+        viewModelScope.launch {
+            foodId.collect { id ->
+                if (id != 0) {
+                    val foodItem = foodRepository.getFoodById(id)
+                    _foodUiState.update {
+                        it.copy(food = foodItem)
+                    }
+                }
+            }
+        }
     }
 
+    fun updateFoodId(id: Int) {
+        _foodId.value = id
+    }
 
-
+    fun getFoodById(foodId: Int) {
+        updateFoodId(foodId)
+    }
 
 }

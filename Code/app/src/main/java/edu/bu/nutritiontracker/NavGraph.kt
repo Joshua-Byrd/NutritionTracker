@@ -15,8 +15,11 @@ fun NavGraph() {
         composable("dailyDisplay"){
             DailyDisplay(navController)
         }
-        composable("addFood"){
-            AddFood(navController)
+        composable("addFood/{foodId}"){
+            val foodId = it.arguments?.getInt("foodId")
+            foodId?.let { id ->
+                AddFood(navController, foodId = id)
+            }
         }
         composable("foodSearch"){
             FoodSearch(navController)

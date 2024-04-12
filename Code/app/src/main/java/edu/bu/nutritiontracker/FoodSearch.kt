@@ -1,5 +1,6 @@
 package edu.bu.nutritiontracker
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,6 +40,7 @@ import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.components.FoodList
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.FoodViewModel
+import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
 
 
 @Composable
@@ -101,7 +103,7 @@ fun FoodSearchScaffold(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold)
 
-            RecentFoods()
+            RecentFoods(navController)
 
         }
     }
@@ -132,33 +134,43 @@ fun FoodSearchBar(
 }
 
 @Composable
-fun RecentFoods(viewModel: DailyFoodsViewModel = hiltViewModel()) {
+fun RecentFoods(
+    navController: NavController,
+    viewModel: DailyFoodsViewModel = hiltViewModel()) {
     val dailyFoodsUiState by viewModel.foodsUiState.collectAsState()
     val date by viewModel.date.collectAsState()
 
     val foodList = dailyFoodsUiState.recentFoodEntriesList
-    //display full list of foods eaten
-    LazyColumn (
-    ){
+
+    LazyColumn(
+    ) {
         foodList.forEach { entry ->
             item {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("${entry.food.name} x${entry.dailyFoods.numServings} ")
-                    val formattedCals = String.format("%.1f",(entry.food.calories * entry.dailyFoods.numServings))
-                    Text("$formattedCals cals")
-                }
+                ClickableFoodEntry(
+                    entry = entry,
+                    onClick = {
+                        navController.navigate("addFood/${entry.food.foodId}")
+                    }
+                )
             }
+
         }
     }
 }
 
-@Preview(
-    showBackground = true,
-    showSystemUi = true)
 @Composable
-fun FoodSearchPreview(){
+fun ClickableFoodEntry(entry: DailyFoodEntryWithFood, onClick: () -> Unit) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .padding(16.dp)
+    ) {
+        Text("${entry.food.name} x${entry.dailyFoods.numServings} ")
+        val formattedCals =
+            String.format("%.1f", (entry.food.calories * entry.dailyFoods.numServings))
+        Text("$formattedCals cals")
+    }
 }

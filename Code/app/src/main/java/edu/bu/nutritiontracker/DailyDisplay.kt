@@ -42,28 +42,6 @@ fun DailyDisplay(
     DailyDisplayScaffold(navController)
 }
 
-
-@Composable
-fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
-
-    val dailyFoodsUiState by viewModel.foodsUiState.collectAsState()
-    val foodSummary by viewModel.foodSummary.collectAsState()
-
-    //display summaries
-    foodSummary.forEach {
-            entry ->
-        Row (
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-        ){
-            Text(entry.key)
-            val formattedValue = String.format("%.1f", entry.value)
-            Text(formattedValue)
-        }
-    }
-}
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DailyDisplayScaffold(
@@ -123,16 +101,28 @@ fun DailyDisplayScaffold(
     }
 }
 
+@Composable
+fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
 
-//@Preview(
-//    showBackground = true,
-//    showSystemUi = true)
-//@Composable
-//fun DailyDisplayPreview() {
-//    val currentDate = Date()
-//    val navController = rememberNavController()
-//    DailyDisplay(navController = navController, currentDate)
-//}
+    val dailyFoodsUiState by viewModel.foodsUiState.collectAsState()
+    val foodSummary by viewModel.foodSummary.collectAsState()
+
+    //display summaries
+    foodSummary.forEach {
+            entry ->
+        Row (
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ){
+            Text(entry.key)
+            val formattedValue = String.format("%.1f", entry.value)
+            Text(formattedValue)
+        }
+    }
+}
+
+
+
 
 
 
