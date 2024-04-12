@@ -1,8 +1,10 @@
 package edu.bu.nutritiontracker
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import java.util.Date
 
@@ -16,10 +18,9 @@ fun NavGraph() {
             DailyDisplay(navController)
         }
         composable("addFood/{foodId}"){
-            val foodId = it.arguments?.getInt("foodId")
-            foodId?.let { id ->
-                AddFood(navController, foodId = id)
-            }
+            backStackEntry ->
+            val passedFoodId = backStackEntry.arguments?.getString("foodId")?.toInt()
+            AddFood(navController, passedFoodId)
         }
         composable("foodSearch"){
             FoodSearch(navController)

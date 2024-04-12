@@ -15,7 +15,7 @@ interface FoodDao {
     suspend fun deleteFood(food: Food)
 
     @Query("SELECT * FROM FOOD WHERE foodId = :searchId")
-    suspend fun getFoodById(searchId: Int): Food
+    fun getFoodById(searchId: Int): Flow<Food>
 
     @Query("SELECT * FROM Food WHERE name LIKE '%' || :searchQuery || '%' ")
     fun getFoodByName(searchQuery: String): Flow<List<Food>>

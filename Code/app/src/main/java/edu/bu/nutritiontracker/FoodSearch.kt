@@ -1,5 +1,6 @@
 package edu.bu.nutritiontracker
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -150,6 +151,7 @@ fun RecentFoods(
                     entry = entry,
                     onClick = {
                         navController.navigate("addFood/${entry.food.foodId}")
+
                     }
                 )
             }
@@ -165,8 +167,8 @@ fun ClickableFoodEntry(entry: DailyFoodEntryWithFood, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() }
-            .padding(16.dp)
+            .clickable {
+                onClick() }
     ) {
         Text("${entry.food.name} x${entry.dailyFoods.numServings} ")
         val formattedCals =
