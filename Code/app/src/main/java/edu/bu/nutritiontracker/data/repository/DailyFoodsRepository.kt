@@ -6,8 +6,9 @@ import edu.bu.nutritiontracker.data.db.DailyFoodsDao
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 import javax.inject.Inject
+import javax.inject.Singleton
 
-
+@Singleton
 class DailyFoodsRepository @Inject constructor(
     private val dailyFoodsDao: DailyFoodsDao,
     ) {
@@ -33,7 +34,7 @@ class DailyFoodsRepository @Inject constructor(
     }
 
 
-    private fun summarizeFoodList(dailyFoodsWithFood: List<DailyFoodEntryWithFood>): Map<String, Double>{
+    fun summarizeFoodList(dailyFoodsWithFood: List<DailyFoodEntryWithFood>): Map<String, Double>{
 
         val result = mutableMapOf<String, Double>(
             "Calories" to 0.0,

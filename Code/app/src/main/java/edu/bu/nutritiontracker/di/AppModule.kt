@@ -9,7 +9,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dagger.internal.Provider
 import edu.bu.nutritiontracker.data.db.DailyFoods
 import edu.bu.nutritiontracker.data.db.DailyFoodsDao
 import edu.bu.nutritiontracker.data.db.DbInitializer
@@ -19,6 +18,7 @@ import edu.bu.nutritiontracker.data.db.NutritionDatabase
 import edu.bu.nutritiontracker.data.repository.DailyFoodsRepository
 import edu.bu.nutritiontracker.data.repository.FoodRepository
 import java.time.LocalDate
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module

@@ -22,6 +22,7 @@ import edu.bu.nutritiontracker.data.FoodViewModel
 fun FoodList(viewModel: DailyFoodsViewModel = hiltViewModel()) {
 
     val dailyFoodsUiState by viewModel.foodsUiState.collectAsState()
+    val date by viewModel.date.collectAsState()
 
     val foodList = dailyFoodsUiState.dailyFoodsWithFoodByDate
     //display full list of foods eaten
@@ -34,12 +35,7 @@ fun FoodList(viewModel: DailyFoodsViewModel = hiltViewModel()) {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(entry.food.name)
-                    Text("${entry.dailyFoods.numServings} serving(s)",
-                        modifier = Modifier
-                            .widthIn(min = 48.dp),
-                        textAlign = TextAlign.Start
-                    )
+                    Text("${entry.food.name} x${entry.dailyFoods.numServings} ")
                     val formattedCals = String.format("%.1f",(entry.food.calories * entry.dailyFoods.numServings))
                     Text("$formattedCals cals")
                 }

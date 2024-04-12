@@ -48,6 +48,10 @@ class DailyFoodsViewModel @Inject constructor(
         DailyFoodsUiState(),
         )
 
+    //Food summary
+    private val _foodSummary: MutableStateFlow<Map<String, Double>> = MutableStateFlow(emptyMap())
+    val foodSummary: StateFlow<Map<String, Double>> = _foodSummary
+
 
     private val _dailyFoodEntryUiState: MutableStateFlow<DailyFoodEntryUiState> =
         MutableStateFlow(DailyFoodEntryUiState())
@@ -79,7 +83,12 @@ class DailyFoodsViewModel @Inject constructor(
             }
         }
 
-        //Do I need to initialize a food entry to anything?
+        //food summary
+        viewModelScope.launch {
+            foodsUiState.collect { state ->
+                _foodSummary.value = dailyFoodsRepository.summarizeFoodList(state.dailyFoodsWithFoodByDate)
+            }
+        }
     }
 
     fun updateDate(newDate: LocalDate) {

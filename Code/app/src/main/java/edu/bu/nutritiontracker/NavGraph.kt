@@ -13,7 +13,7 @@ fun NavGraph() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "dailyDisplay"){
         composable("dailyDisplay"){
-            DailyDisplay(navController, Date())
+            DailyDisplay(navController)
         }
         composable("addFood"){
             AddFood(navController)

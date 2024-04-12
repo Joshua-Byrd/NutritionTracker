@@ -54,75 +54,38 @@ import java.time.LocalDateTime
 
 @Composable
 fun DailyDisplay(
-    navController: NavController,
-    date: Date
+    navController: NavController
 ) {
-    ScaffoldExample(LocalDate.now())
-
-//    Column (
-//        verticalArrangement = Arrangement.Top,
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        modifier = Modifier
-//            .padding(16.dp)
-//            .fillMaxSize()
-//
-//    ){
-//
-//        DateDisplay(date)
-//
-//        Spacer(
-//            modifier = Modifier.height(10.dp)
-//        )
-//
-//        Summary()
-//
-//        Spacer(
-//            modifier = Modifier.height(10.dp)
-//        )
-//        Text("Foods Eaten", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-//        FoodList()
-//
-//
-//        BottomMenu(navController){}
-//        }
-
-
-
+    ScaffoldExample()
 }
 
-@SuppressLint("SimpleDateFormat")
-@Composable
-fun DateDisplay(date: LocalDateTime) {
-    //display date
-    val formattedDate = SimpleDateFormat("MM/dd/yyyy").format(date)
-    Text(formattedDate, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-}
 
 @Composable
 fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
 
+    val dailyFoodsUiState by viewModel.foodsUiState.collectAsState()
+    val foodSummary by viewModel.foodSummary.collectAsState()
+
     //display summaries
-    Text("Summary", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-//    val foodSummary = viewModel.foodSummary.collectAsState()
-//    foodSummary.value.forEach {
-//            entry ->
-//        Row (
-//            horizontalArrangement = Arrangement.SpaceBetween,
-//            modifier = Modifier.fillMaxWidth()
-//        ){
-//            Text(entry.key)
-//            val formattedValue = String.format("%.1f", entry.value)
-//            Text(formattedValue)
-//        }
-//    }
+    foodSummary.forEach {
+            entry ->
+        Row (
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ){
+            Text(entry.key)
+            val formattedValue = String.format("%.1f", entry.value)
+            Text(formattedValue)
+        }
+    }
 }
 
 
 //This is here just to having a UI while making sure the database installs
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScaffoldExample(date: LocalDate) {
-    var presses by remember { mutableIntStateOf(0) }
+fun ScaffoldExample(viewModel: DailyFoodsViewModel = hiltViewModel()) {
+    val date by viewModel.date.collectAsState()
 
     Scaffold(
         topBar = {
@@ -132,13 +95,18 @@ fun ScaffoldExample(date: LocalDate) {
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("$date")
+                    Text(
+                        text ="$date",
+                        modifier = Modifier,
+                        textAlign = TextAlign.Center
+                    //TODO make this clickable with calendar; update date
+                    )
                 }
             )
         },
 
         floatingActionButton = {
-            FloatingActionButton(onClick = { presses++ }) {
+            FloatingActionButton(onClick = { /*goto search page*/ }) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
             }
         }
@@ -146,24 +114,39 @@ fun ScaffoldExample(date: LocalDate) {
         Column(
             modifier = Modifier
                 .padding(innerPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.Top,
         ) {
-            Text("Summary will go here")
+            Text(
+                text ="Summary",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center)
+            Summary()
+
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            Text(
+                text ="Foods Eaten",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center)
 
             FoodList()
 
         }
     }
 }
-@Preview(
-    showBackground = true,
-    showSystemUi = true)
-@Composable
-fun DailyDisplayPreview() {
-    val currentDate = Date()
-    val navController = rememberNavController()
-    DailyDisplay(navController = navController, currentDate)
-}
+
+
+//@Preview(
+//    showBackground = true,
+//    showSystemUi = true)
+//@Composable
+//fun DailyDisplayPreview() {
+//    val currentDate = Date()
+//    val navController = rememberNavController()
+//    DailyDisplay(navController = navController, currentDate)
+//}
 
 
 
