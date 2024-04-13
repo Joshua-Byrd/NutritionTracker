@@ -1,6 +1,7 @@
 package edu.bu.nutritiontracker
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,17 +10,27 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -29,6 +40,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import edu.bu.nutritiontracker.components.FoodList
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
+import java.time.LocalDate
 
 
 /**
@@ -48,6 +60,8 @@ fun DailyDisplayScaffold(
     navController:NavController,
     viewModel: DailyFoodsViewModel = hiltViewModel()
 ) {
+    //TODO finish the date picker
+    var openDialog = remember { mutableStateOf(false) }
     val date by viewModel.date.collectAsState()
 
     Scaffold(
@@ -60,9 +74,12 @@ fun DailyDisplayScaffold(
                 title = {
                     Text(
                         text ="$date",
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .clickable { openDialog.value = true }
+                            .fillMaxWidth(),
+
                         textAlign = TextAlign.Center
-                    //TODO make this clickable with calendar; update date
+                    //TODO finish the date picker
                     )
                 }
             )
@@ -99,6 +116,11 @@ fun DailyDisplayScaffold(
 
         }
     }
+
+    if (openDialog.value) {
+        //TODO finish the date picker
+        CalendarDatePicker()
+    }
 }
 
 @Composable
@@ -120,6 +142,19 @@ fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
         }
     }
 }
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CalendarDatePicker(viewModel: DailyFoodsViewModel = hiltViewModel()) {
+    val date by viewModel.date.collectAsState()
+    val dateState = rememberDatePickerState()
+    DatePicker(state = dateState)
+}
+
+
+
+
 
 
 

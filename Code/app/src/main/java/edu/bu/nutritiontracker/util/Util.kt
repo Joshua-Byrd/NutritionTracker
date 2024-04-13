@@ -1,5 +1,10 @@
 package edu.bu.nutritiontracker.util
+import android.os.Build
+import androidx.annotation.RequiresApi
 import edu.bu.nutritiontracker.data.db.Food
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 
 /**
  * Provides utility functions to other classes/Activities
@@ -41,6 +46,12 @@ fun getTestFoodMap(): Map<Food, Int> {
         whiteRice to 3)
 }
 
+fun convertMillisToLocalDate(millis: Long) : LocalDate {
+    return Instant
+        .ofEpochMilli(millis)
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate()
+}
 
 
 

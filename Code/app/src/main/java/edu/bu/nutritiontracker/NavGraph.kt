@@ -25,8 +25,10 @@ fun NavGraph() {
         composable("foodSearch"){
             FoodSearch(navController)
         }
-        composable("foodSearchResult"){
-            FoodSearchResult(navController, "apple - 1 medium")
+        composable("foodSearchResult/{foodName}"){
+                backStackEntry ->
+            backStackEntry.arguments?.getString("foodName")
+                ?.let { FoodSearchResult(navController, it) }
         }
         composable("bottomMenu"){}
     }

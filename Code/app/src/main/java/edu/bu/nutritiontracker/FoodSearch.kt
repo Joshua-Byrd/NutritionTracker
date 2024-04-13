@@ -1,13 +1,11 @@
 package edu.bu.nutritiontracker
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -32,13 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import edu.bu.nutritiontracker.components.BottomMenu
-import edu.bu.nutritiontracker.components.FoodList
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.FoodViewModel
 import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
@@ -127,7 +122,7 @@ fun FoodSearchBar(
             onValueChange = { foodName = it})
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("foodSearchResult/$foodName") },
         ) {
             Text("Search")
         }
@@ -147,7 +142,7 @@ fun RecentFoods(
     ) {
         foodList.forEach { entry ->
             item {
-                ClickableFoodEntry(
+                ClickableDailyFoodEntryWithFood(
                     entry = entry,
                     onClick = {
                         navController.navigate("addFood/${entry.food.foodId}")
@@ -161,7 +156,7 @@ fun RecentFoods(
 }
 
 @Composable
-fun ClickableFoodEntry(entry: DailyFoodEntryWithFood, onClick: () -> Unit) {
+fun ClickableDailyFoodEntryWithFood(entry: DailyFoodEntryWithFood, onClick: () -> Unit) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,

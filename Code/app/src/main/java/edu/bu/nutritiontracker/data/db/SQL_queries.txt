@@ -2,7 +2,10 @@ INSERT INTO Food (name, serving, calories, protein, totalFat, carbohydrates, sat
 VALUES
 ('Chicken Breast', '100g', 165, 31, 3.6, 0, 1, 0),
 ('Rice (White, Cooked)', '100g', 130, 2.7, 0.3, 28.2, 0.1, 0.4),
- ('Broccoli', '100g', 34, 2.8, 0.4, 6.6, 0.1, 2.6),
+('Broccoli', '100g', 34, 2.8, 0.4, 6.6, 0.1, 2.6),
+('Rice and Beans', '1 cup', 153.4, 5.0, 4.9, 0, 1, 4.3),
+('Rice (Brown, Cooked)', '100g', 123.6, 2.7, 0.3, 25.2, 0.1, 0.8),
+('Rice cake', '100 regular', 35.0, 2.8, 0.4, 7.3, 0.1, 2.6),
 ('Spinach', '100g', 23, 2.9, 0.4, 3.6, 0.1, 2.2),
 ('Eggs (Large, Boiled)', '1 egg', 70, 6, 5, 0.6, 1.6, 0),
 ('Salmon (Wild-Caught)', '100g', 206, 25, 10.9, 0, 2.1, 0),
