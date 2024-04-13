@@ -25,6 +25,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -40,6 +41,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import edu.bu.nutritiontracker.components.FoodList
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
+import edu.bu.nutritiontracker.util.convertMillisToLocalDate
 import java.time.LocalDate
 
 
@@ -60,9 +62,12 @@ fun DailyDisplayScaffold(
     navController:NavController,
     viewModel: DailyFoodsViewModel = hiltViewModel()
 ) {
-    //TODO finish the date picker
+
+    //DatePicker state
     var openDialog = remember { mutableStateOf(false) }
     val date by viewModel.date.collectAsState()
+    val dateState = rememberDatePickerState()
+
 
     Scaffold(
         topBar = {
@@ -119,9 +124,38 @@ fun DailyDisplayScaffold(
 
     if (openDialog.value) {
         //TODO finish the date picker
-        CalendarDatePicker()
+        DatePickerDialog(
+            onDismissRequest = { openDialog.value = false },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        convertMillisToLocalDate(dateState.selectedDateMillis)?.let {
+                            viewModel.updateDate(
+                                it
+                            )
+                        }
+                        openDialog.value = false }
+                ) {
+                    Text(text = "OK")
+                }
+            },
+            dismissButton = {
+                Button(
+                    onClick = { openDialog.value = false }
+                ) {
+                    Text(text = "Cancel")
+                }
+            }) {
+            DatePicker(
+                state = dateState,
+                showModeToggle = true
+            )
+        }
     }
 }
+
+
+
 
 @Composable
 fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
@@ -143,14 +177,6 @@ fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CalendarDatePicker(viewModel: DailyFoodsViewModel = hiltViewModel()) {
-    val date by viewModel.date.collectAsState()
-    val dateState = rememberDatePickerState()
-    DatePicker(state = dateState)
-}
 
 
 

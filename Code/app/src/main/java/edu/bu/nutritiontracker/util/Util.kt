@@ -5,6 +5,7 @@ import edu.bu.nutritiontracker.data.db.Food
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
+import java.time.ZoneOffset
 
 /**
  * Provides utility functions to other classes/Activities
@@ -46,11 +47,13 @@ fun getTestFoodMap(): Map<Food, Int> {
         whiteRice to 3)
 }
 
-fun convertMillisToLocalDate(millis: Long) : LocalDate {
-    return Instant
-        .ofEpochMilli(millis)
-        .atZone(ZoneId.systemDefault())
+fun convertMillisToLocalDate(millis: Long?) : LocalDate? {
+    return millis?.let {
+        Instant
+        .ofEpochMilli(it)
+        .atZone(ZoneOffset.UTC)
         .toLocalDate()
+    }
 }
 
 

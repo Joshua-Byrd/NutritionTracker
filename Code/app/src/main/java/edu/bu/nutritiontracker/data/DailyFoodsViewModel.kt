@@ -8,7 +8,9 @@ import edu.bu.nutritiontracker.data.repository.DailyFoodsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -65,8 +67,7 @@ class DailyFoodsViewModel @Inject constructor(
     init {
         //all entries by date
         viewModelScope.launch {
-            dailyFoodsRepository.getDailyFoodsWithFoodByDate(date.value).collect {
-                entries ->
+            dailyFoodsRepository.getDailyFoodsWithFoodByDate(date.value).collect { entries ->
                 _dailyFoodsUiState.update {
                     it.copy(dailyFoodsWithFoodByDate = entries)
                 }
@@ -75,8 +76,7 @@ class DailyFoodsViewModel @Inject constructor(
 
         //recent entries
         viewModelScope.launch {
-            dailyFoodsRepository.getRecentFoodsList().collect {
-                    entries ->
+            dailyFoodsRepository.getRecentFoodsList().collect { entries ->
                 _dailyFoodsUiState.update {
                     it.copy(recentFoodEntriesList = entries)
                 }
@@ -86,10 +86,30 @@ class DailyFoodsViewModel @Inject constructor(
         //food summary
         viewModelScope.launch {
             foodsUiState.collect { state ->
-                _foodSummary.value = dailyFoodsRepository.summarizeFoodList(state.dailyFoodsWithFoodByDate)
+                _foodSummary.value =
+                    dailyFoodsRepository.summarizeFoodList(state.dailyFoodsWithFoodByDate)
             }
         }
+
+        //date
+        viewModelScope.launch {
+            date.collect { fetchFoodsUiState(it) }
+
+        }
     }
+
+    suspend fun fetchFoodsUiState(date: LocalDate) {
+        // Fetch and update daily foods UI state based on the new date
+        val dailyFoodsWithFoodByDate = dailyFoodsRepository.getDailyFoodsWithFoodByDate(date)
+            .firstOrNull() ?: emptyList()
+        val recentFoodsList = dailyFoodsRepository.getRecentFoodsList()
+            .firstOrNull() ?: emptyList()
+        _dailyFoodsUiState.value = DailyFoodsUiState(dailyFoodsWithFoodByDate, recentFoodsList)
+
+        // Update food summary
+        _foodSummary.value = dailyFoodsRepository.summarizeFoodList(dailyFoodsWithFoodByDate)
+    }
+
 
     fun updateDate(newDate: LocalDate) {
         _date.value = newDate
