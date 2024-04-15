@@ -35,14 +35,7 @@ object AppModule {
             context,
             NutritionDatabase::class.java,
             "nutrition_db"
-        ).addCallback(
-            //call the initializer to add food to the database
-            DbInitializer(
-                foodProvider,
-                dailyFoodsProvider
-            )
-        )
-            .build()
+        ).createFromAsset("nutrition_db").build()
     }
 
     @Provides
@@ -60,4 +53,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDailyFoodsRepository(dailyFoodsDao: DailyFoodsDao) = DailyFoodsRepository(dailyFoodsDao = dailyFoodsDao)
+
+    @Provides
+    @Singleton
+    fun provideDbInitializer(
+        context: Context,
+        foodProvider: Provider<FoodDao>,
+        dailyFoodsProvider: Provider<DailyFoodsDao>
+    ): DbInitializer {
+        return DbInitializer(context, foodProvider, dailyFoodsProvider)
+    }
 }

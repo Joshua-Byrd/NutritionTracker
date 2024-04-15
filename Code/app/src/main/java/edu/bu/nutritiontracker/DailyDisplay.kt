@@ -1,6 +1,7 @@
 package edu.bu.nutritiontracker
 
 
+import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -42,7 +43,7 @@ import androidx.navigation.NavController
 import edu.bu.nutritiontracker.components.FoodList
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.util.convertMillisToLocalDate
-import java.time.LocalDate
+import java.util.Locale
 
 
 /**
@@ -78,7 +79,8 @@ fun DailyDisplayScaffold(
                 ),
                 title = {
                     Text(
-                        text ="$date",
+
+                        text = "$date",
                         modifier = Modifier
                             .clickable { openDialog.value = true }
                             .fillMaxWidth(),

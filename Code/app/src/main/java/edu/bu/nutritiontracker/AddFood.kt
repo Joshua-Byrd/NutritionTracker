@@ -1,12 +1,12 @@
 package edu.bu.nutritiontracker
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -22,29 +22,26 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import edu.bu.nutritiontracker.components.BottomMenu
-import edu.bu.nutritiontracker.components.FoodList
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.db.Food
 import edu.bu.nutritiontracker.data.FoodViewModel
+
 
 @Composable
 fun AddFood(navController: NavController, foodId: Int?) {
@@ -95,7 +92,7 @@ fun AddFoodScaffold(
 
             Spacer(modifier = Modifier.padding(8.dp))
 
-            AddFoodConfirm(navController,foodId = foodId)
+            AddFoodConfirm(navController, foodId = foodId, context = LocalContext.current)
 
         }
     }
@@ -181,10 +178,13 @@ fun FoodPropertiesDisplay(
 fun AddFoodConfirm(
     navController: NavController,
     dailyFoodsViewModel: DailyFoodsViewModel = hiltViewModel(),
-    foodId: Int?
+    foodId: Int?,
+    context: Context
 ) {
     val date by dailyFoodsViewModel.date.collectAsState()
     var servings by remember { mutableStateOf("") }
+    var text = ""
+    val duration = Toast.LENGTH_LONG
 
     Column(
         horizontalAlignment = Alignment.Start,
@@ -205,12 +205,25 @@ fun AddFoodConfirm(
             Button(
                 onClick = {
                     if (foodId != null) {
-                        dailyFoodsViewModel.addDailyFoodEntry(
-                            date,
-                            foodId,
-                            servings.toInt(),
-                        )
-                        navController.navigate("dailyDisplay")
+                        try {
+                            val servingsInt = servings.toInt()
+
+                            dailyFoodsViewModel.addDailyFoodEntry(
+                                date,
+                                foodId,
+                                servingsInt
+                            )
+
+                            text = "Food added!"
+                            Toast.makeText(context, text, duration).show()
+
+                            navController.navigate("dailyDisplay")
+
+                        } catch (e: NumberFormatException) {
+                            //show toast if input can't be parsed as an int
+                            text = "Please enter a valid number"
+                            Toast.makeText(context, text, duration).show()
+                        }
                     }
                 },
             ) {

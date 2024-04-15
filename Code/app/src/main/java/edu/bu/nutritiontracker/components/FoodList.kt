@@ -36,7 +36,10 @@ fun FoodList(viewModel: DailyFoodsViewModel = hiltViewModel()) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("${entry.food.name} x${entry.dailyFoods.numServings} ")
-                    val formattedCals = String.format("%.1f",(entry.food.calories * entry.dailyFoods.numServings))
+                    val formattedCals = String.format(
+                        "%.1f",
+                        (entry.food.calories * entry.dailyFoods.numServings)
+                    )
                     Text("$formattedCals cals")
                 }
             }
