@@ -35,7 +35,7 @@ object AppModule {
             context,
             NutritionDatabase::class.java,
             "nutrition_db"
-        ).createFromAsset("nutrition_db").build()
+        ).createFromAsset("nutrition_db").build() //DBInitializer no longer needed
     }
 
     @Provides

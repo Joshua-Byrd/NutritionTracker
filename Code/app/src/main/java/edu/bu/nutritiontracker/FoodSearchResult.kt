@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import edu.bu.nutritiontracker.components.BottomMenu
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.FoodViewModel
 import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
