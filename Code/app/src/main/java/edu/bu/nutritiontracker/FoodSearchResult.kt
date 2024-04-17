@@ -36,6 +36,7 @@ import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.FoodViewModel
 import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
 import edu.bu.nutritiontracker.data.db.Food
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @Composable
@@ -55,6 +56,8 @@ fun FoodSearchResultScaffold(
     viewModel: DailyFoodsViewModel = hiltViewModel()
 ) {
     val date by viewModel.date.collectAsState()
+    val formattedDate = date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
+
 
     Scaffold(
         topBar = {
@@ -66,7 +69,7 @@ fun FoodSearchResultScaffold(
                     ),
                 title = {
                     Text(
-                        text ="$date",
+                        text = formattedDate,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )

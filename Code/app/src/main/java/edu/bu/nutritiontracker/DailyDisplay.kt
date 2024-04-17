@@ -42,6 +42,9 @@ import androidx.navigation.NavController
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.db.DailyFoodEntryWithFood
 import edu.bu.nutritiontracker.util.convertMillisToLocalDate
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 /**
@@ -66,7 +69,7 @@ fun DailyDisplayScaffold(
     var openDialog = remember { mutableStateOf(false) }
     val date by viewModel.date.collectAsState()
     val dateState = rememberDatePickerState()
-
+    val formattedDate = date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
 
     Scaffold(
         topBar = {
@@ -78,7 +81,7 @@ fun DailyDisplayScaffold(
                 title = {
                     Text(
 
-                        text = "$date",
+                        text = formattedDate,
                         modifier = Modifier
                             .clickable { openDialog.value = true }
                             .fillMaxWidth(),

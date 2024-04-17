@@ -41,6 +41,7 @@ import androidx.navigation.NavController
 import edu.bu.nutritiontracker.data.DailyFoodsViewModel
 import edu.bu.nutritiontracker.data.db.Food
 import edu.bu.nutritiontracker.data.FoodViewModel
+import java.time.format.DateTimeFormatter
 
 
 @Composable
@@ -57,6 +58,8 @@ fun AddFoodScaffold(
     foodViewModel: FoodViewModel = hiltViewModel()
 ) {
     val date by dailyFoodsViewModel.date.collectAsState()
+    val formattedDate = date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
+
 
     Scaffold(
         topBar = {
@@ -67,7 +70,7 @@ fun AddFoodScaffold(
                 ),
                 title = {
                     Text(
-                        text ="$date",
+                        text = formattedDate,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
