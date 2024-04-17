@@ -133,6 +133,7 @@ fun ClickableFoodSearchEntry(entry: Food, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
+            .padding(8.dp)
             .clickable {
                 onClick() }
     ) {

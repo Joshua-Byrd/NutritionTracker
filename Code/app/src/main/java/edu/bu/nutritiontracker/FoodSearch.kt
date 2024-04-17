@@ -3,6 +3,7 @@ package edu.bu.nutritiontracker
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -139,6 +140,7 @@ fun RecentFoods(
     val foodList = dailyFoodsUiState.recentFoodEntriesList
 
     LazyColumn(
+        modifier = Modifier.padding(8.dp)
     ) {
         foodList.forEach { entry ->
             item {
@@ -162,6 +164,7 @@ fun ClickableDailyFoodEntryWithFood(entry: DailyFoodEntryWithFood, onClick: () -
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
+            .padding(8.dp)
             .clickable {
                 onClick() }
     ) {
