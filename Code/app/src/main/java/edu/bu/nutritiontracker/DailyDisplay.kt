@@ -1,14 +1,18 @@
 package edu.bu.nutritiontracker
 
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
@@ -213,29 +217,35 @@ fun ClickableDailyListFoodEntryWithFood(
     entry: DailyFoodEntryWithFood,
     onDeleteClicked: () -> Unit
 ) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+    Box(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(8.dp)
+            .border(1.dp, MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(4.dp))
     ) {
-        Text(
-            text = "${entry.food.name} x${entry.dailyFoods.numServings} ",
-            modifier = Modifier.weight(1f)
-        )
-        val formattedCals = String.format("%.1f", (entry.food.calories * entry.dailyFoods.numServings))
-        Text("$formattedCals cals")
-        IconButton(
-            onClick = onDeleteClicked,
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth().background(Color(0xFFBFCBAD))
         ) {
-            Icon(
-                imageVector = Icons.Default.Close,
-                contentDescription = "Delete",
+            Text(
+                text = "${entry.food.name} x${entry.dailyFoods.numServings} ",
+                modifier = Modifier.weight(1f)
+                    .padding(8.dp)
             )
+            val formattedCals = String.format("%.1f", (entry.food.calories * entry.dailyFoods.numServings))
+            Text("$formattedCals cals")
+            IconButton(
+                onClick = onDeleteClicked,
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Delete",
+                )
+            }
         }
     }
 }
-
 
 
 
