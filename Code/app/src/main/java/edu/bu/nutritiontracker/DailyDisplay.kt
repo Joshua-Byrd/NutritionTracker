@@ -99,7 +99,12 @@ fun DailyDisplayScaffold(
 
         floatingActionButton = {
             FloatingActionButton(onClick = { navController.navigate("foodSearch") }) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
+//                Icon(Icons.Default.Add, contentDescription = "Add")
+                Text(
+                    text = "Add Food",
+                    modifier = Modifier.padding(8.dp),
+                    color = Color(0xFF4C662B)
+                )
             }
         }
     ) { innerPadding ->
@@ -177,9 +182,15 @@ fun Summary(viewModel: DailyFoodsViewModel = hiltViewModel()) {
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ){
-            Text(entry.key)
-            val formattedValue = String.format("%.1f", entry.value)
-            Text(formattedValue)
+            if (entry.key == "Calories") {
+                Text(entry.key)
+                val formattedValue = String.format("%.1f", entry.value)
+                Text(text = "$formattedValue cals")
+            } else {
+                Text(entry.key)
+                val formattedValue = String.format("%.1f", entry.value)
+                Text(text = "$formattedValue     g")
+            }
         }
     }
 }
@@ -221,32 +232,42 @@ fun ClickableDailyListFoodEntryWithFood(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .border(1.dp, MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(4.dp))
+            .border(1.dp, Color(0xFFBFCBAD), shape = RoundedCornerShape(4.dp))
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().background(Color(0xFFBFCBAD))
+            modifier = Modifier.fillMaxWidth()
+                .background(Color(0xFFBFCBAD))
         ) {
-            Text(
-                text = "${entry.food.name} x${entry.dailyFoods.numServings} ",
-                modifier = Modifier.weight(1f)
-                    .padding(8.dp)
-            )
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "${entry.food.name}",
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = "${entry.dailyFoods.numServings} serving(s)",
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
+                    fontSize = 12.sp
+                )
+            }
+
             val formattedCals = String.format("%.1f", (entry.food.calories * entry.dailyFoods.numServings))
             Text("$formattedCals cals")
+
             IconButton(
                 onClick = onDeleteClicked,
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = "Delete",
+                    modifier = Modifier
                 )
             }
         }
     }
 }
-
 
 
 

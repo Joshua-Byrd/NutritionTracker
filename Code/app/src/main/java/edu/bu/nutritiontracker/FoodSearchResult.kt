@@ -24,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -77,11 +78,16 @@ fun FoodSearchResultScaffold(
             )
         },
 
-        floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate("foodSearch") }) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
-            }
-        }
+//        floatingActionButton = {
+//            FloatingActionButton(onClick = { navController.navigate("foodSearch") }) {
+//               Icon(Icons.Default.Add, contentDescription = "Add")
+//                Text(
+//                    text = "Add Food",
+//                    modifier = Modifier.padding(8.dp),
+//                    color = Color(0xFF4C662B)
+//                )
+//            }
+//        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
