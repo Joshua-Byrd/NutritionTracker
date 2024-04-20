@@ -25,7 +25,7 @@ class FoodViewModel @Inject constructor(
     ): ViewModel() {
 
         private val _name: MutableStateFlow<String> = MutableStateFlow("")
-        val name: StateFlow<String> = _name
+    val name: StateFlow<String> get() = _name
 
 
         private val _foodUiState: MutableStateFlow<FoodSearchState>

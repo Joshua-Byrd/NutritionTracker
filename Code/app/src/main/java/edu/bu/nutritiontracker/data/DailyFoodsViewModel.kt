@@ -38,7 +38,7 @@ class DailyFoodsViewModel @Inject constructor(
 
     //date of food entries to display
     private val _date: MutableStateFlow<LocalDate> = MutableStateFlow(LocalDate.now())
-    val date: StateFlow<LocalDate> = _date
+    val date: StateFlow<LocalDate> get() = _date
 
     //list of foods by date
     private val _dailyFoodsUiState: MutableStateFlow<DailyFoodsUiState>
@@ -52,7 +52,7 @@ class DailyFoodsViewModel @Inject constructor(
 
     //Food summary
     private val _foodSummary: MutableStateFlow<Map<String, Double>> = MutableStateFlow(emptyMap())
-    val foodSummary: StateFlow<Map<String, Double>> = _foodSummary
+    val foodSummary: StateFlow<Map<String, Double>> get() = _foodSummary
 
 
     private val _dailyFoodEntryUiState: MutableStateFlow<DailyFoodEntryUiState> =
